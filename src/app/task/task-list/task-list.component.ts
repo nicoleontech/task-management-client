@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TaskService } from '../api/services';
-import { Task } from '../api/models';
+import { TaskService } from '../../api/services';
+import { Task } from '../../api/models';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit, OnDestroy {
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService) { }
 
   loading = false;
   taskList: Task[] = [];
@@ -20,6 +20,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.subscription = this.taskService.getAllTasks$Json().subscribe({
       next: (apiData: Array<Task>) => {
+        this.taskList = apiData;
+
         console.log(apiData);
       },
       error: (error: any) => {
