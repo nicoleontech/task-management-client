@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TaskService } from '../../api/services';
-import { Task } from '../../api/models';
 import { Subscription } from 'rxjs';
+import { TaskService } from '../api/services';
+import { Task } from '../api/models';
 
 @Component({
-  selector: 'app-task-list',
-  templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.css'],
+  selector: 'app-task',
+  templateUrl: './task.component.html',
+  styleUrls: ['./task.component.css'],
 })
-export class TaskListComponent implements OnInit, OnDestroy {
+export class TaskComponent implements OnInit, OnDestroy {
   constructor(private taskService: TaskService) { }
 
   loading = false;
