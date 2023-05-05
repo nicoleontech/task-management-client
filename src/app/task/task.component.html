@@ -1,0 +1,73 @@
+<div *ngIf="loading" class="mt-2 row alert alert-info">
+    Loading Tasks ...
+    <div class="spinner-border text-primary" role="status">
+        <span class="sr-only"></span>
+    </div>
+</div>
+
+<div class="container">
+    <table class="table table-bordered table-striped table-sm table-hover">
+        <caption>List of tasks</caption>
+        <thead>
+            <th scope="col">Task Number</th>
+            <th scope="col">Category</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Status</th>
+
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr *ngFor="let task of taskList">
+                <td>
+                    {{ task.taskId }}
+                </td>
+                <td>
+                    {{ task.category }}
+                </td>
+                <td>
+                    {{ task.title }}
+                </td>
+                <td>
+                    {{ task.description}}
+                </td>
+                <td>
+                    {{ task.dueDate }}
+                </td>
+                <td>
+                    {{ task.priority }}
+                </td>
+                <td>
+                    {{ task.status }}
+                </td>
+            </tr>
+            <!-- insert a new task -->
+
+            <tr>
+                <th scope="row">#</th>
+                <td>category</td>
+                <td>title</td>
+                <td>description</td>
+
+                <td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-calendar" viewBox="0 0 16 16">
+                        <path
+                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                    </svg>Due date</td>
+
+                <li *ngFor="let task of taskList">
+
+                    <td>{{task.priority}}</td>
+
+                    <td>status</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
