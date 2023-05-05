@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TaskService } from '../api/services';
 import { Task } from '../api/models';
@@ -14,6 +14,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   loading = false;
   taskList: Task[] = [];
   subscription: Subscription | undefined;
+  @Input() items: Task[] = [];
 
   ngOnInit(): void {
     console.log('Starting "findall" API call');
