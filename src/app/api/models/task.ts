@@ -10,6 +10,6 @@ export interface Task {
    * Task Status
    */
   status?: 'open' | 'ongoing' | 'completed' | 'overdue';
-  taskId?: number;
+  taskId: number;
   title: string;
 }

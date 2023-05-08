@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TaskService } from '../api/services';
 import { Task } from '../api/models';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-task',
@@ -9,15 +10,37 @@ import { Task } from '../api/models';
   styleUrls: ['./task.component.css'],
 })
 export class TaskComponent implements OnInit, OnDestroy {
-  constructor(private taskService: TaskService) { }
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder, private taskService: TaskService) {
+    this.form = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(5)]],
+      description: ['', [Validators.required, Validators.minLength(5)]],
+      dueDate: ['', Validators.required],
+      priority: ['', Validators.required],
+      status: ['', Validators.required],
+    });
+  }
 
   loading = false;
   taskList: Task[] = [];
   subscription: Subscription | undefined;
-  @Input() items: Task[] = [];
+  task: Task = {
+    taskId: 1,
+    title: '',
+    description: '',
+    priority: 'high',
+    status: 'open',
+    dueDate: '',
+  };
+
+  priorityValues = ['high', 'medium', 'low'];
+  statusValues = ['open', 'ongoing', 'completed', 'overdue'];
+  taskId!: number;
 
   ngOnInit(): void {
     console.log('Starting "findall" API call');
+
     this.loading = true;
     this.subscription = this.taskService.getAllTasks$Json().subscribe({
       next: (apiData: Array<Task>) => {
@@ -38,5 +61,30 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
+  }
+
+  onSubmit(): void {
+    console.log('insert call');
+    if (this.form.valid) {
+      console.log(this.form.value);
+      const task = this.form.value as Task;
+      console.log({ body: task });
+      // const taskWithBody = { body: task };
+      this.taskService
+        .addTask$Json$Json({ body: task })
+        .subscribe((response) => {
+          console.log(response);
+        });
+    } else {
+      console.log('Form is not valid');
+    }
+  }
+
+  onDeleteTask(taskId: number) {
+    console.log('delete called!');
+    console.log(taskId);
+    this.taskService
+      .deleteTask$Response({ api_key: '', taskId: taskId })
+      .subscribe((response) => console.log(response));
   }
 }
