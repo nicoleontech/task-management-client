@@ -2,7 +2,13 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TaskService } from '../api/services';
 import { Task } from '../api/models';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-task',
@@ -37,7 +43,6 @@ export class TaskComponent implements OnInit, OnDestroy {
   priorityValues = ['high', 'medium', 'low'];
   statusValues = ['open', 'ongoing', 'completed', 'overdue'];
   taskId!: number;
-
 
   ngOnInit(): void {
     console.log('Starting "findall" API call');
@@ -89,47 +94,12 @@ export class TaskComponent implements OnInit, OnDestroy {
       .subscribe((response) => console.log(response));
   }
 
-  //test
-  // userInput = ''
-  // log(userInput: string) {
-  //   this.userInput = userInput;
-  //   console.log(this.userInput)
+  editId: number | undefined;
 
-  // }
-
-  //1st way
-  selectedPriority: "high" | "medium" | "low" | null | undefined;
-  newDate!: string;
-
-  logUpdatedValue(newVal: HTMLTableRowElement) {
-    console.log(newVal.cells)
-    const cells = newVal.cells
-    for (let cell of cells) {
-      console.log(cell.textContent)
-      console.log(this.newDate)
-      console.log(this.selectedPriority)
-
-      //TODO : send these values to the api using the row #updated approach! or using the ngModel see two-way binding
-    }
+  onUpdateTask(task: Task) {
+    this.editId = task.taskId;
+    this.taskService
+      .updateTask$Json$Json({ body: task })
+      .subscribe((response) => console.log(response));
   }
-
-  onDateChange(event: Event) {
-    const dateElement = event.target as HTMLInputElement;
-    this.newDate = dateElement.value
-    console.log(this.newDate)
-  }
-
-  //end 1st way
-
-  //2nd way
-  updatedTask!: Task;
-
-  onUpdateTask(updatedTask: Task) {
-    this.updatedTask = updatedTask;
-    console.log(this.updatedTask)
-    //send it to the backend
-  }
-
-
-
 }
