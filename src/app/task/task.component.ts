@@ -98,6 +98,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   onUpdateTask(task: Task) {
     this.editId = task.taskId;
+    //TODO : Don't make the api call right away, check the condition that something changed and then update the task
     this.taskService
       .updateTask$Json$Json({ body: task })
       .subscribe((response) => console.log(response));
