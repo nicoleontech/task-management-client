@@ -38,6 +38,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   statusValues = ['open', 'ongoing', 'completed', 'overdue'];
   taskId!: number;
 
+
   ngOnInit(): void {
     console.log('Starting "findall" API call');
 
@@ -87,4 +88,32 @@ export class TaskComponent implements OnInit, OnDestroy {
       .deleteTask$Response({ api_key: '', taskId: taskId })
       .subscribe((response) => console.log(response));
   }
+
+
+
+  // onUserInput(event: Event) {
+  //   const target = event.target as HTMLInputElement;
+  //   const newValue = target.textContent
+  //   console.log(newValue)
+  //   return newValue;
+  // }
+
+  userInput = ''
+  log(userInput: string) {
+    this.userInput = userInput;
+    console.log(this.userInput)
+
+  }
+
+  logUpdatedValue(newVal: HTMLTableRowElement) {
+    console.log(newVal.cells)
+    const cells = newVal.cells
+    for (let cell of cells) {
+      console.log(cell.textContent)
+    }
+
+  }
+
+
+
 }

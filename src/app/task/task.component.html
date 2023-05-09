@@ -1,126 +1,121 @@
 <div *ngIf="loading" class="mt-2 row alert alert-info">
-  Loading Tasks ...
-  <div class="spinner-border text-primary" role="status">
-    <span class="sr-only"></span>
-  </div>
+    Loading Tasks ...
+    <div class="spinner-border text-primary" role="status">
+        <span class="sr-only"></span>
+    </div>
 </div>
 
 <div class="container">
-  <caption style="display: inline">
-    List of tasks
-  </caption>
-  <table class="table table-bordered table-striped table-sm table-hover">
-    <thead>
-      <th scope="col">#</th>
-      <th scope="col">Category</th>
-      <th scope="col">Title</th>
-      <th scope="col">Description</th>
-      <th scope="col">Due Date</th>
-      <th scope="col">Priority</th>
-      <th scope="col">Status</th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let task of taskList">
-        <td>
-          {{ task.taskId }}
-        </td>
-        <td>
-          {{ task.category }}
-        </td>
-        <td>
-          {{ task.title }}
-        </td>
-        <td>
-          {{ task.description }}
-        </td>
-        <td>
-          {{ task.dueDate }}
-        </td>
-        <td>
-          {{ task.priority }}
-        </td>
-        <td>
-          {{ task.status }}
-        </td>
-        <td>
-          <button
-            (click)="onDeleteTask(task.taskId)"
-            class="btn btn-danger btn-sm"
-          >
-            Delete Task
-          </button>
-        </td>
-        <td>
-          <button class="btn btn-warning btn-sm">Update Task</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <caption style="display: inline">
+        List of tasks
+    </caption>
+    <table class="table table-bordered table-striped table-sm table-hover">
+        <thead>
+            <th scope="col">#</th>
+            <th scope="col">Category</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Status</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of taskList">
+                <td>
+                    {{ task.taskId }}
+                </td>
+                <td>
+                    {{ task.category }}
+                </td>
+                <td>
+                    {{ task.title }}
+                </td>
+                <td>
+                    {{ task.description }}
+                </td>
+                <td>
+                    {{ task.dueDate }}
+                </td>
+                <td>
+                    {{ task.priority }}
+                </td>
+                <td>
+                    {{ task.status }}
+                </td>
+                <td>
+                    <button (click)="onDeleteTask(task.taskId)" class="btn btn-danger btn-sm">
+                        Delete Task
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-warning btn-sm">Update Task</button>
+                </td>
+            </tr>
+            <tr #updated contenteditable="true">
 
-  <!-- insert a new task -->
+                <td>editable 1</td>
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <th scope="row">#</th>
-    <td></td>
-    <td>
-      <input
-        type="text"
-        id="title"
-        name="title"
-        value="title"
-        required
-        minlength="5"
-        class="form-control"
-        formControlName="title"
-      />
-    </td>
-    <td>
-      <input
-        type="text"
-        id="description"
-        name="description"
-        value="description"
-        required
-        minlength="5"
-        class="form-control"
-        formControlName="description"
-      />
-    </td>
+                <td>editable 2</td>
+                <td>editable 3</td>
 
-    <td>
-      <input
-        type="date"
-        id="dueDate"
-        name="dueDate"
-        value=""
-        class="form-control"
-        formControlName="dueDate"
-      />
-    </td>
-    <td>
-      <!-- TODO add a placeholder for priority -->
-      <label for="priority">
-        <select name="priority" class="form-control" formControlName="priority">
-          <option *ngFor="let priority of priorityValues" [value]="priority">
-            {{ priority }}
-          </option>
-        </select>
-      </label>
-    </td>
-    <td>
-      <!-- TODO add a placeholder for status -->
+            </tr>
+            <td>
+                <button class="btn btn-warning btn-sm" (click)="logUpdatedValue(updated)">Update Task</button>
+            </td>
+            <tr>
+                <!-- example test -->
+                <!-- <div class="col">{{ userInput }}</div> -->
+                <div class="col">
+                    <input type="text" class="form-control" [(ngModel)]="userInput" />
+                </div>
+                <td>
+                    <button class="btn btn-warning btn-sm" (click)="log(userInput)">Update Task</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-      <label for="status">
-        <select name="status" class="form-control" formControlName="status">
-          <option *ngFor="let status of statusValues" [value]="status">
-            {{ status }}
-          </option>
-        </select>
-      </label>
-    </td>
+    <!-- insert a new task -->
 
-    <button type="submit" class="btn btn-success" [disabled]="!form.valid">
-      Insert new Task!
-    </button>
-  </form>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <th scope="row">#</th>
+        <td></td>
+        <td>
+            <input type="text" id="title" name="title" value="title" required minlength="5" class="form-control"
+                formControlName="title" />
+        </td>
+        <td>
+            <input type="text" id="description" name="description" value="description" required minlength="5"
+                class="form-control" formControlName="description" />
+        </td>
+
+        <td>
+            <input type="date" id="dueDate" name="dueDate" value="" class="form-control" formControlName="dueDate" />
+        </td>
+        <td>
+            <!-- TODO add a placeholder for priority -->
+            <label for="priority">
+                <select name="priority" class="form-control" formControlName="priority">
+                    <option *ngFor="let priority of priorityValues" [value]="priority">
+                        {{ priority }}
+                    </option>
+                </select>
+            </label>
+        </td>
+        <td>
+            <!-- TODO add a placeholder for status -->
+
+            <label for="status">
+                <select name="status" class="form-control" formControlName="status">
+                    <option *ngFor="let status of statusValues" [value]="status">
+                        {{ status }}
+                    </option>
+                </select>
+            </label>
+        </td>
+
+        <button type="submit" class="btn btn-success" [disabled]="!form.valid">
+            Insert new Task!
+        </button>
+    </form>
 </div>
