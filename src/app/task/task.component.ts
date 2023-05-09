@@ -89,30 +89,45 @@ export class TaskComponent implements OnInit, OnDestroy {
       .subscribe((response) => console.log(response));
   }
 
+  //test
+  // userInput = ''
+  // log(userInput: string) {
+  //   this.userInput = userInput;
+  //   console.log(this.userInput)
 
-
-  // onUserInput(event: Event) {
-  //   const target = event.target as HTMLInputElement;
-  //   const newValue = target.textContent
-  //   console.log(newValue)
-  //   return newValue;
   // }
 
-  userInput = ''
-  log(userInput: string) {
-    this.userInput = userInput;
-    console.log(this.userInput)
-
-  }
+  //1st way
+  selectedPriority: "high" | "medium" | "low" | null | undefined;
+  newDate!: string;
 
   logUpdatedValue(newVal: HTMLTableRowElement) {
     console.log(newVal.cells)
     const cells = newVal.cells
     for (let cell of cells) {
       console.log(cell.textContent)
-    }
-    //TODO take the text content of each cell to send it to the api call
+      console.log(this.newDate)
+      console.log(this.selectedPriority)
 
+      //TODO : send these values to the api using the row #updated approach! or using the ngModel see two-way binding
+    }
+  }
+
+  onDateChange(event: Event) {
+    const dateElement = event.target as HTMLInputElement;
+    this.newDate = dateElement.value
+    console.log(this.newDate)
+  }
+
+  //end 1st way
+
+  //2nd way
+  updatedTask!: Task;
+
+  onUpdateTask(updatedTask: Task) {
+    this.updatedTask = updatedTask;
+    console.log(this.updatedTask)
+    //send it to the backend
   }
 
 

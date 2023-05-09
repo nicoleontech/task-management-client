@@ -20,7 +20,7 @@
             <th scope="col">Status</th>
         </thead>
         <tbody>
-            <tr *ngFor="let task of taskList">
+            <tr *ngFor="let task of taskList" [(ngModel)]="updatedTask">
                 <td>
                     {{ task.taskId }}
                 </td>
@@ -48,7 +48,7 @@
                     </button>
                 </td>
                 <td>
-                    <button class="btn btn-warning btn-sm">Update Task</button>
+                    <button class="btn btn-warning btn-sm" (click)="onUpdateTask(updatedTask)">Update Task</button>
                 </td>
             </tr>
             <tr #updated contenteditable="true">
@@ -57,21 +57,32 @@
 
                 <td>editable 2</td>
                 <td>editable 3</td>
+                <td> <input type='date' value="2018-07-22" (input)="onDateChange($event)" /> </td>
+
+                <td>
+                    <label for="priority">
+                        <select [(ngModel)]="selectedPriority" name="priority">
+                            <option *ngFor="let priority of priorityValues" [value]="priority">
+                                {{ priority }}
+                            </option>
+                        </select>
+                    </label>
+                </td>
 
             </tr>
             <td>
                 <button class="btn btn-warning btn-sm" (click)="logUpdatedValue(updated)">Update Task</button>
             </td>
-            <tr>
-                <!-- example test -->
-                <!-- <div class="col">{{ userInput }}</div> -->
+
+            <!-- example test -->
+            <!-- <tr>
                 <div class="col">
                     <input type="text" class="form-control" [(ngModel)]="userInput" />
                 </div>
                 <td>
                     <button class="btn btn-warning btn-sm" (click)="log(userInput)">Update Task</button>
                 </td>
-            </tr>
+            </tr> -->
         </tbody>
     </table>
 
