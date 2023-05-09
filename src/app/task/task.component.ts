@@ -111,6 +111,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     for (let cell of cells) {
       console.log(cell.textContent)
     }
+    //TODO take the text content of each cell to send it to the api call
 
   }
 
