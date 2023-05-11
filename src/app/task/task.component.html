@@ -22,37 +22,90 @@
     <tbody>
       <tr *ngFor="let task of taskList">
         <td>
-          {{ task.taskId }}
+          <span>{{ task.taskId }}</span>
         </td>
         <td>
-          {{ task.category }}
+          <span>{{ task.category }}</span>
         </td>
         <td>
-          <span *ngIf="editId !== task.taskId">{{ task.title }}</span>
+          <span>{{ task.title }}</span>
           <input
+            *ngIf="isEditing"
             type="text"
+            id="title"
+            name="title"
+            value="title"
+            required
+            minlength="5"
             class="form-control"
-            [(ngModel)]="task.title"
-            *ngIf="editId === task.taskId"
+            formControlName="title"
+            [(ngModel)]="editedTask.title"
           />
         </td>
         <td>
-          {{ task.description }}
-        </td>
-        <td>
-          <span *ngIf="editId !== task.taskId">{{ task.dueDate }}</span>
+          <span>{{ task.description }}</span>
           <input
-            type="date"
+            *ngIf="isEditing"
+            type="text"
+            id="description"
+            name="description"
+            value="description"
+            required
+            minlength="5"
             class="form-control"
-            [(ngModel)]="task.dueDate"
-            *ngIf="editId === task.taskId"
+            formControlName="description"
+            [(ngModel)]="editedTask.description"
           />
         </td>
         <td>
-          {{ task.priority }}
+          <span>{{ task.dueDate }}</span>
+          <input
+            *ngIf="isEditing"
+            type="date"
+            id="dueDate"
+            name="dueDate"
+            value=""
+            class="form-control"
+            formControlName="dueDate"
+            [(ngModel)]="editedTask.dueDate"
+          />
         </td>
         <td>
-          {{ task.status }}
+          <span>{{ task.priority }}</span>
+          <label for="priority">
+            <select
+              *ngIf="isEditing"
+              name="priority"
+              class="form-control"
+              formControlName="priority"
+            >
+              <option
+                *ngFor="let priority of priorityValues"
+                [value]="priority"
+              >
+                {{ priority }}
+              </option>
+            </select>
+          </label>
+        </td>
+        <td>
+          <span>{{ task.status }}</span>
+          <label for="status">
+            <select
+              *ngIf="isEditing"
+              name="status"
+              class="form-control"
+              formControlName="status"
+            >
+              <option
+                *ngFor="let status of statusValues"
+                [value]="status"
+                [(ngModel)]="editedTask.status"
+              >
+                {{ status }}
+              </option>
+            </select>
+          </label>
         </td>
         <td>
           <button
@@ -63,8 +116,13 @@
           </button>
         </td>
         <td>
-          <button class="btn btn-warning btn-sm" (click)="onUpdateTask(task)">
+          <button class="btn btn-warning btn-sm" (click)="editTask()">
             Edit Task
+          </button>
+        </td>
+        <td *ngIf="isEditing">
+          <button class="btn btn-success btn-sm" (click)="onUpdateTask()">
+            Save
           </button>
         </td>
       </tr>

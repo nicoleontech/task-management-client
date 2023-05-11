@@ -39,6 +39,8 @@ export class TaskComponent implements OnInit, OnDestroy {
     status: 'open',
     dueDate: '',
   };
+  editedTask = { ...this.task };
+  isEditing: boolean = false;
 
   priorityValues = ['high', 'medium', 'low'];
   statusValues = ['open', 'ongoing', 'completed', 'overdue'];
@@ -94,13 +96,13 @@ export class TaskComponent implements OnInit, OnDestroy {
       .subscribe((response) => console.log(response));
   }
 
-  editId: number | undefined;
+  editTask() {
+    this.isEditing = true;
+  }
 
-  onUpdateTask(task: Task) {
-    this.editId = task.taskId;
-    //TODO : Don't make the api call right away, check the condition that something changed and then update the task
+  onUpdateTask() {
     this.taskService
-      .updateTask$Json$Json({ body: task })
+      .updateTask$Json$Json({ body: this.editedTask })
       .subscribe((response) => console.log(response));
   }
 }
