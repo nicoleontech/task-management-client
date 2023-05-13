@@ -12,5 +12,4 @@ export interface Task {
   status?: 'open' | 'ongoing' | 'completed' | 'overdue';
   taskId: number;
   title: string;
-  // hotfix change
 }
