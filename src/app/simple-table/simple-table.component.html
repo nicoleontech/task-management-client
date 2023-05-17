@@ -19,7 +19,7 @@
       <td>
         <span *ngIf="!isEditing">{{ task.title }}</span>
         <input
-          *ngIf="isEditing"
+          *ngIf="isEditing && taskToBeEdited.taskId === task.taskId"
           type="text"
           id="title"
           name="title"
@@ -32,7 +32,7 @@
       <td>
         <span *ngIf="!isEditing">{{ task.description }}</span>
         <input
-          *ngIf="isEditing"
+          *ngIf="isEditing && taskToBeEdited.taskId === task.taskId"
           type="text"
           id="description"
           name="description"
@@ -45,7 +45,7 @@
       <td>
         <span *ngIf="!isEditing">{{ task.dueDate }}</span>
         <input
-          *ngIf="isEditing"
+          *ngIf="isEditing && taskToBeEdited.taskId === task.taskId"
           type="date"
           id="dueDate"
           name="dueDate"
@@ -56,7 +56,11 @@
       <td>
         <span *ngIf="!isEditing">{{ task.priority }}</span>
         <label for="priority">
-          <select *ngIf="isEditing" name="priority" [(ngModel)]="task.priority">
+          <select
+            *ngIf="isEditing && taskToBeEdited.taskId === task.taskId"
+            name="priority"
+            [(ngModel)]="task.priority"
+          >
             <option
               *ngFor="let priority of priorityValues"
               [selected]="priority === task.priority"
@@ -69,7 +73,11 @@
       <td>
         <span *ngIf="!isEditing">{{ task.status }}</span>
         <label for="status">
-          <select *ngIf="isEditing" name="status" [(ngModel)]="task.status">
+          <select
+            *ngIf="isEditing && taskToBeEdited.taskId === task.taskId"
+            name="status"
+            [(ngModel)]="task.status"
+          >
             <option
               *ngFor="let status of statusValues"
               [selected]="status === task.status"
@@ -88,7 +96,7 @@
         </button>
       </td>
       <td *ngIf="!isEditing">
-        <button class="btn btn-warning btn-sm" (click)="onEditTask()">
+        <button class="btn btn-warning btn-sm" (click)="onEditTask(task)">
           Edit Task
         </button>
       </td>

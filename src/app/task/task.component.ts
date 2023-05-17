@@ -2,7 +2,6 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TaskService } from '../api/services';
 import { Task } from '../api/models';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-task',
@@ -15,16 +14,11 @@ export class TaskComponent implements OnInit, OnDestroy {
   loading = false;
   taskList: Task[] = [];
   subscription: Subscription | undefined;
-  task: Task = {
-    taskId: 1,
-    title: '',
-    description: '',
-    priority: 'high',
-    status: 'open',
-    dueDate: '',
-  };
+  insertedTask: Task = {} as Task;
+  updatedTask: Task = {} as Task;
 
   isEditing: boolean = false;
+  taskToBeEdited: Task = {} as Task;
 
   priorityValues = ['high', 'medium', 'low'];
   statusValues = ['open', 'ongoing', 'completed', 'overdue'];
@@ -55,10 +49,14 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.subscription?.unsubscribe();
   }
 
-  onSubmit(task: Task): void {
-    this.taskService.addTask$Json$Json({ body: task }).subscribe((response) => {
-      console.log(response);
-    });
+  onSubmit(receivedTask: Task): void {
+    this.taskService
+      .addTask$Json$Json({ body: receivedTask })
+      .subscribe((response) => {
+        console.log(response);
+        this.insertedTask = Object.assign(response);
+        this.taskList.push(this.insertedTask);
+      });
   }
 
   onDeleteTask(taskId: number) {
@@ -66,20 +64,31 @@ export class TaskComponent implements OnInit, OnDestroy {
     console.log(taskId);
     this.taskService
       .deleteTask$Response({ api_key: '', taskId: taskId })
-      .subscribe((response) => console.log(response));
+      .subscribe((response) => {
+        console.log(response);
+        this.taskList.splice(
+          this.taskList.findIndex((task) => task.taskId === taskId),
+          1
+        );
+      });
   }
 
-  onEditTask() {
-    this.isEditing = true;
-  }
+  // TODO: inform the parent component about the updated item and render it in the table
 
-  onUpdateTask(task: Task) {
+  onUpdateTask(updatedTask: Task) {
     this.taskService
-      .updateTask$Json$Json({ body: task })
-      .subscribe((response) => console.log(response));
-  }
-
-  onCancelUpdateTask() {
+      .updateTask$Json$Json({ body: updatedTask })
+      .subscribe((response) => {
+        console.log(response);
+        //  this.taskList.push(task);
+        this.taskList.map((task) => {
+          if (task.taskId === response.taskId) {
+            console.log(task.taskId === response.taskId);
+            this.updatedTask = Object.assign(response);
+            this.taskList = [{ ...this.taskList, ...this.updatedTask }];
+          }
+        });
+      });
     this.isEditing = false;
   }
 }

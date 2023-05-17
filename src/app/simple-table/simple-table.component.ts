@@ -7,13 +7,14 @@ import { Task } from '../api/models';
   styleUrls: ['./simple-table.component.css'],
 })
 export class SimpleTableComponent {
-  @Input() isEditing: boolean = false;
+  isEditing: boolean = false;
+  taskToBeEdited: Task = {} as Task;
   @Input() priorityValues: string[] = [];
   @Input() statusValues: string[] = [];
 
   @Input() taskList: Task[] = [];
   @Output() deleteTask = new EventEmitter<number>();
-  @Output() editTask = new EventEmitter();
+  // @Output() editTask = new EventEmitter();
   @Output() updateTask = new EventEmitter<Task>();
   @Output() cancelUpdateTask = new EventEmitter();
 
@@ -21,14 +22,15 @@ export class SimpleTableComponent {
     this.deleteTask.emit(taskId);
   }
 
-  onEditTask() {
-    this.editTask.emit();
+  onEditTask(task: Task) {
+    this.taskToBeEdited = task;
+    this.isEditing = true;
   }
 
   onUpdateTask(task: Task) {
     this.updateTask.emit(task);
   }
   onCancelEdit() {
-    this.cancelUpdateTask.emit();
+    this.isEditing = false;
   }
 }

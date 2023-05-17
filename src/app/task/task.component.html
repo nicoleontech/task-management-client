@@ -11,13 +11,10 @@
   </caption>
   <app-simple-table
     [taskList]="taskList"
-    [isEditing]="isEditing"
     [priorityValues]="priorityValues"
     [statusValues]="statusValues"
     (deleteTask)="onDeleteTask($event)"
-    (editTask)="onEditTask()"
     (updateTask)="onUpdateTask($event)"
-    (cancelUpdateTask)="onCancelUpdateTask()"
   >
   </app-simple-table>
 
