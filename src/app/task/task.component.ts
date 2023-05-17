@@ -75,7 +75,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   // TODO: inform the parent component about the updated item and render it in the table
 
-  onUpdateTask(updatedTask: Task) {
+  onUpdateTask(task: Task) {
     this.taskService
       .updateTask$Json$Json({ body: task })
       .subscribe((response) => {
