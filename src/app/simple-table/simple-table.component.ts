@@ -29,6 +29,7 @@ export class SimpleTableComponent {
 
   onUpdateTask(task: Task) {
     this.updateTask.emit(task);
+    this.isEditing = false;
   }
   onCancelEdit() {
     this.isEditing = false;

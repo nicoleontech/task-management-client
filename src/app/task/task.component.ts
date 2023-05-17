@@ -73,8 +73,6 @@ export class TaskComponent implements OnInit, OnDestroy {
       });
   }
 
-  // TODO: inform the parent component about the updated item and render it in the table
-
   onUpdateTask(task: Task) {
     this.taskService
       .updateTask$Json$Json({ body: task })
@@ -82,8 +80,9 @@ export class TaskComponent implements OnInit, OnDestroy {
         this.taskList[
           this.taskList.findIndex((task) => task.taskId === response.taskId)
         ] = response;
+        // this.taskList = Object.assign([], this.taskList);
+        // console.log(this.taskList);
       });
-    this.isEditing = false;
   }
 
   onCancelUpdateTask() {
