@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./task.component.css'],
 })
 export class TaskComponent implements OnInit, OnDestroy {
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService) { }
 
   loading = false;
   taskList: Task[] = [];
@@ -76,7 +76,11 @@ export class TaskComponent implements OnInit, OnDestroy {
   onUpdateTask(task: Task) {
     this.taskService
       .updateTask$Json$Json({ body: task })
-      .subscribe((response) => console.log(response));
+      .subscribe((response) => {
+        console.log(response)
+        //update taskList don't need an updatedTask
+        this.taskList[this.taskList.findIndex(task => task.taskId === response.taskId)] = response
+      });
   }
 
   onCancelUpdateTask() {
