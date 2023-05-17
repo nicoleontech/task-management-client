@@ -77,18 +77,17 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   onUpdateTask(updatedTask: Task) {
     this.taskService
-      .updateTask$Json$Json({ body: updatedTask })
+      .updateTask$Json$Json({ body: task })
       .subscribe((response) => {
         console.log(response);
-        //  this.taskList.push(task);
-        this.taskList.map((task) => {
-          if (task.taskId === response.taskId) {
-            console.log(task.taskId === response.taskId);
-            this.updatedTask = Object.assign(response);
-            this.taskList = [{ ...this.taskList, ...this.updatedTask }];
-          }
-        });
+        //update taskList don't need an updatedTask
+        this.taskList[
+          this.taskList.findIndex((task) => task.taskId === response.taskId)
+        ] = response;
       });
+  }
+
+  onCancelUpdateTask() {
     this.isEditing = false;
   }
 }
