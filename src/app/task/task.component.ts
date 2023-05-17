@@ -79,12 +79,11 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.taskService
       .updateTask$Json$Json({ body: task })
       .subscribe((response) => {
-        console.log(response);
-        //update taskList don't need an updatedTask
         this.taskList[
           this.taskList.findIndex((task) => task.taskId === response.taskId)
         ] = response;
       });
+    this.isEditing = false;
   }
 
   onCancelUpdateTask() {
