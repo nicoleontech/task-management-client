@@ -7,6 +7,7 @@ import { Task } from '../api/models';
   styleUrls: ['./simple-table.component.css'],
 })
 export class SimpleTableComponent {
+  order: string = 'taskId';
   isEditing: boolean = false;
   taskToBeEdited: Task = {} as Task;
   @Input() priorityValues: string[] = [];

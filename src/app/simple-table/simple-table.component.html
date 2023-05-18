@@ -9,7 +9,7 @@
     <th scope="col">Status</th>
   </thead>
   <tbody>
-    <tr *ngFor="let task of taskList">
+    <tr *ngFor="let task of taskList | orderBy : order">
       <td>
         <span>{{ task.taskId }}</span>
       </td>

@@ -73,15 +73,16 @@ export class TaskComponent implements OnInit, OnDestroy {
       });
   }
 
+  //TODO : write error component and check if error response
   onUpdateTask(task: Task) {
     this.taskService
       .updateTask$Json$Json({ body: task })
       .subscribe((response) => {
+        console.log(response);
+
         this.taskList[
           this.taskList.findIndex((task) => task.taskId === response.taskId)
         ] = response;
-        // this.taskList = Object.assign([], this.taskList);
-        // console.log(this.taskList);
       });
   }
 
