@@ -11,6 +11,7 @@ import { map, filter } from 'rxjs/operators';
 
 import { Task } from '../models/task';
 
+
 /**
  * Operations about tasks
  */
@@ -18,7 +19,10 @@ import { Task } from '../models/task';
   providedIn: 'root',
 })
 export class TaskService extends BaseService {
-  constructor(config: ApiConfiguration, http: HttpClient) {
+  constructor(
+    config: ApiConfiguration,
+    http: HttpClient
+  ) {
     super(config, http);
   }
 
@@ -37,32 +41,26 @@ export class TaskService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllTasks$Json$Response(
-    params?: {},
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Array<Task>>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.GetAllTasksPath,
-      'get'
-    );
+  getAllTasks$Json$Response(params?: {
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Array<Task>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.GetAllTasksPath, 'get');
     if (params) {
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'json',
-          accept: 'application/json',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Array<Task>>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<Task>>;
+      })
+    );
   }
 
   /**
@@ -75,11 +73,13 @@ export class TaskService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllTasks$Json(
-    params?: {},
-    context?: HttpContext
-  ): Observable<Array<Task>> {
-    return this.getAllTasks$Json$Response(params, context).pipe(
+  getAllTasks$Json(params?: {
+  },
+  context?: HttpContext
+
+): Observable<Array<Task>> {
+
+    return this.getAllTasks$Json$Response(params,context).pipe(
       map((r: StrictHttpResponse<Array<Task>>) => r.body as Array<Task>)
     );
   }
@@ -94,32 +94,26 @@ export class TaskService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllTasks$Xml$Response(
-    params?: {},
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Array<Task>>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.GetAllTasksPath,
-      'get'
-    );
+  getAllTasks$Xml$Response(params?: {
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Array<Task>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.GetAllTasksPath, 'get');
     if (params) {
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'blob',
-          accept: 'application/xml',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Array<Task>>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'blob',
+      accept: 'application/xml',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<Task>>;
+      })
+    );
   }
 
   /**
@@ -132,8 +126,13 @@ export class TaskService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllTasks$Xml(params?: {}, context?: HttpContext): Observable<Array<Task>> {
-    return this.getAllTasks$Xml$Response(params, context).pipe(
+  getAllTasks$Xml(params?: {
+  },
+  context?: HttpContext
+
+): Observable<Array<Task>> {
+
+    return this.getAllTasks$Xml$Response(params,context).pipe(
       map((r: StrictHttpResponse<Array<Task>>) => r.body as Array<Task>)
     );
   }
@@ -153,38 +152,32 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  updateTask$Json$Json$Response(
-    params: {
-      /**
-       * Update an existent task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Task>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.UpdateTaskPath,
-      'put'
-    );
+  updateTask$Json$Json$Response(params: {
+
+    /**
+     * Update an existent task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Task>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.UpdateTaskPath, 'put');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'json',
-          accept: 'application/json',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Task>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Task>;
+      })
+    );
   }
 
   /**
@@ -197,16 +190,18 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  updateTask$Json$Json(
-    params: {
-      /**
-       * Update an existent task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<Task> {
-    return this.updateTask$Json$Json$Response(params, context).pipe(
+  updateTask$Json$Json(params: {
+
+    /**
+     * Update an existent task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<Task> {
+
+    return this.updateTask$Json$Json$Response(params,context).pipe(
       map((r: StrictHttpResponse<Task>) => r.body as Task)
     );
   }
@@ -221,38 +216,32 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  updateTask$Json$Xml$Response(
-    params: {
-      /**
-       * Update an existent task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Task>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.UpdateTaskPath,
-      'put'
-    );
+  updateTask$Json$Xml$Response(params: {
+
+    /**
+     * Update an existent task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Task>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.UpdateTaskPath, 'put');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'blob',
-          accept: 'application/xml',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Task>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'blob',
+      accept: 'application/xml',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Task>;
+      })
+    );
   }
 
   /**
@@ -265,16 +254,18 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  updateTask$Json$Xml(
-    params: {
-      /**
-       * Update an existent task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<Task> {
-    return this.updateTask$Json$Xml$Response(params, context).pipe(
+  updateTask$Json$Xml(params: {
+
+    /**
+     * Update an existent task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<Task> {
+
+    return this.updateTask$Json$Xml$Response(params,context).pipe(
       map((r: StrictHttpResponse<Task>) => r.body as Task)
     );
   }
@@ -289,38 +280,32 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/xml` and handles request body of type `application/xml`.
    */
-  updateTask$Xml$Json$Response(
-    params: {
-      /**
-       * Update an existent task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Task>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.UpdateTaskPath,
-      'put'
-    );
+  updateTask$Xml$Json$Response(params: {
+
+    /**
+     * Update an existent task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Task>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.UpdateTaskPath, 'put');
     if (params) {
       rb.body(params.body, 'application/xml');
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'json',
-          accept: 'application/json',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Task>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Task>;
+      })
+    );
   }
 
   /**
@@ -333,16 +318,18 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/xml` and handles request body of type `application/xml`.
    */
-  updateTask$Xml$Json(
-    params: {
-      /**
-       * Update an existent task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<Task> {
-    return this.updateTask$Xml$Json$Response(params, context).pipe(
+  updateTask$Xml$Json(params: {
+
+    /**
+     * Update an existent task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<Task> {
+
+    return this.updateTask$Xml$Json$Response(params,context).pipe(
       map((r: StrictHttpResponse<Task>) => r.body as Task)
     );
   }
@@ -357,38 +344,32 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/xml` and handles request body of type `application/xml`.
    */
-  updateTask$Xml$Xml$Response(
-    params: {
-      /**
-       * Update an existent task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Task>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.UpdateTaskPath,
-      'put'
-    );
+  updateTask$Xml$Xml$Response(params: {
+
+    /**
+     * Update an existent task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Task>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.UpdateTaskPath, 'put');
     if (params) {
       rb.body(params.body, 'application/xml');
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'blob',
-          accept: 'application/xml',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Task>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'blob',
+      accept: 'application/xml',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Task>;
+      })
+    );
   }
 
   /**
@@ -401,16 +382,18 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/xml` and handles request body of type `application/xml`.
    */
-  updateTask$Xml$Xml(
-    params: {
-      /**
-       * Update an existent task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<Task> {
-    return this.updateTask$Xml$Xml$Response(params, context).pipe(
+  updateTask$Xml$Xml(params: {
+
+    /**
+     * Update an existent task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<Task> {
+
+    return this.updateTask$Xml$Xml$Response(params,context).pipe(
       map((r: StrictHttpResponse<Task>) => r.body as Task)
     );
   }
@@ -425,38 +408,32 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/x-www-form-urlencoded` and handles request body of type `application/x-www-form-urlencoded`.
    */
-  updateTask$XWwwFormUrlencoded$Json$Response(
-    params: {
-      /**
-       * Update an existent task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Task>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.UpdateTaskPath,
-      'put'
-    );
+  updateTask$XWwwFormUrlencoded$Json$Response(params: {
+
+    /**
+     * Update an existent task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Task>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.UpdateTaskPath, 'put');
     if (params) {
       rb.body(params.body, 'application/x-www-form-urlencoded');
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'json',
-          accept: 'application/json',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Task>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Task>;
+      })
+    );
   }
 
   /**
@@ -469,19 +446,20 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/x-www-form-urlencoded` and handles request body of type `application/x-www-form-urlencoded`.
    */
-  updateTask$XWwwFormUrlencoded$Json(
-    params: {
-      /**
-       * Update an existent task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<Task> {
-    return this.updateTask$XWwwFormUrlencoded$Json$Response(
-      params,
-      context
-    ).pipe(map((r: StrictHttpResponse<Task>) => r.body as Task));
+  updateTask$XWwwFormUrlencoded$Json(params: {
+
+    /**
+     * Update an existent task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<Task> {
+
+    return this.updateTask$XWwwFormUrlencoded$Json$Response(params,context).pipe(
+      map((r: StrictHttpResponse<Task>) => r.body as Task)
+    );
   }
 
   /**
@@ -494,38 +472,32 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/x-www-form-urlencoded` and handles request body of type `application/x-www-form-urlencoded`.
    */
-  updateTask$XWwwFormUrlencoded$Xml$Response(
-    params: {
-      /**
-       * Update an existent task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Task>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.UpdateTaskPath,
-      'put'
-    );
+  updateTask$XWwwFormUrlencoded$Xml$Response(params: {
+
+    /**
+     * Update an existent task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Task>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.UpdateTaskPath, 'put');
     if (params) {
       rb.body(params.body, 'application/x-www-form-urlencoded');
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'blob',
-          accept: 'application/xml',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Task>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'blob',
+      accept: 'application/xml',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Task>;
+      })
+    );
   }
 
   /**
@@ -538,19 +510,20 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/x-www-form-urlencoded` and handles request body of type `application/x-www-form-urlencoded`.
    */
-  updateTask$XWwwFormUrlencoded$Xml(
-    params: {
-      /**
-       * Update an existent task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<Task> {
-    return this.updateTask$XWwwFormUrlencoded$Xml$Response(
-      params,
-      context
-    ).pipe(map((r: StrictHttpResponse<Task>) => r.body as Task));
+  updateTask$XWwwFormUrlencoded$Xml(params: {
+
+    /**
+     * Update an existent task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<Task> {
+
+    return this.updateTask$XWwwFormUrlencoded$Xml$Response(params,context).pipe(
+      map((r: StrictHttpResponse<Task>) => r.body as Task)
+    );
   }
 
   /**
@@ -568,38 +541,32 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  addTask$Json$Json$Response(
-    params: {
-      /**
-       * Create a new task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Task>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.AddTaskPath,
-      'post'
-    );
+  addTask$Json$Json$Response(params: {
+
+    /**
+     * Create a new task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Task>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.AddTaskPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'json',
-          accept: 'application/json',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Task>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Task>;
+      })
+    );
   }
 
   /**
@@ -612,16 +579,18 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  addTask$Json$Json(
-    params: {
-      /**
-       * Create a new task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<Task> {
-    return this.addTask$Json$Json$Response(params, context).pipe(
+  addTask$Json$Json(params: {
+
+    /**
+     * Create a new task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<Task> {
+
+    return this.addTask$Json$Json$Response(params,context).pipe(
       map((r: StrictHttpResponse<Task>) => r.body as Task)
     );
   }
@@ -636,38 +605,32 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  addTask$Json$Xml$Response(
-    params: {
-      /**
-       * Create a new task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Task>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.AddTaskPath,
-      'post'
-    );
+  addTask$Json$Xml$Response(params: {
+
+    /**
+     * Create a new task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Task>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.AddTaskPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'blob',
-          accept: 'application/xml',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Task>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'blob',
+      accept: 'application/xml',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Task>;
+      })
+    );
   }
 
   /**
@@ -680,16 +643,18 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  addTask$Json$Xml(
-    params: {
-      /**
-       * Create a new task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<Task> {
-    return this.addTask$Json$Xml$Response(params, context).pipe(
+  addTask$Json$Xml(params: {
+
+    /**
+     * Create a new task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<Task> {
+
+    return this.addTask$Json$Xml$Response(params,context).pipe(
       map((r: StrictHttpResponse<Task>) => r.body as Task)
     );
   }
@@ -704,38 +669,32 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/xml` and handles request body of type `application/xml`.
    */
-  addTask$Xml$Json$Response(
-    params: {
-      /**
-       * Create a new task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Task>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.AddTaskPath,
-      'post'
-    );
+  addTask$Xml$Json$Response(params: {
+
+    /**
+     * Create a new task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Task>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.AddTaskPath, 'post');
     if (params) {
       rb.body(params.body, 'application/xml');
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'json',
-          accept: 'application/json',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Task>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Task>;
+      })
+    );
   }
 
   /**
@@ -748,16 +707,18 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/xml` and handles request body of type `application/xml`.
    */
-  addTask$Xml$Json(
-    params: {
-      /**
-       * Create a new task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<Task> {
-    return this.addTask$Xml$Json$Response(params, context).pipe(
+  addTask$Xml$Json(params: {
+
+    /**
+     * Create a new task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<Task> {
+
+    return this.addTask$Xml$Json$Response(params,context).pipe(
       map((r: StrictHttpResponse<Task>) => r.body as Task)
     );
   }
@@ -772,38 +733,32 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/xml` and handles request body of type `application/xml`.
    */
-  addTask$Xml$Xml$Response(
-    params: {
-      /**
-       * Create a new task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Task>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.AddTaskPath,
-      'post'
-    );
+  addTask$Xml$Xml$Response(params: {
+
+    /**
+     * Create a new task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Task>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.AddTaskPath, 'post');
     if (params) {
       rb.body(params.body, 'application/xml');
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'blob',
-          accept: 'application/xml',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Task>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'blob',
+      accept: 'application/xml',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Task>;
+      })
+    );
   }
 
   /**
@@ -816,16 +771,18 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/xml` and handles request body of type `application/xml`.
    */
-  addTask$Xml$Xml(
-    params: {
-      /**
-       * Create a new task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<Task> {
-    return this.addTask$Xml$Xml$Response(params, context).pipe(
+  addTask$Xml$Xml(params: {
+
+    /**
+     * Create a new task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<Task> {
+
+    return this.addTask$Xml$Xml$Response(params,context).pipe(
       map((r: StrictHttpResponse<Task>) => r.body as Task)
     );
   }
@@ -840,38 +797,32 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/x-www-form-urlencoded` and handles request body of type `application/x-www-form-urlencoded`.
    */
-  addTask$XWwwFormUrlencoded$Json$Response(
-    params: {
-      /**
-       * Create a new task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Task>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.AddTaskPath,
-      'post'
-    );
+  addTask$XWwwFormUrlencoded$Json$Response(params: {
+
+    /**
+     * Create a new task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Task>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.AddTaskPath, 'post');
     if (params) {
       rb.body(params.body, 'application/x-www-form-urlencoded');
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'json',
-          accept: 'application/json',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Task>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Task>;
+      })
+    );
   }
 
   /**
@@ -884,16 +835,18 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/x-www-form-urlencoded` and handles request body of type `application/x-www-form-urlencoded`.
    */
-  addTask$XWwwFormUrlencoded$Json(
-    params: {
-      /**
-       * Create a new task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<Task> {
-    return this.addTask$XWwwFormUrlencoded$Json$Response(params, context).pipe(
+  addTask$XWwwFormUrlencoded$Json(params: {
+
+    /**
+     * Create a new task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<Task> {
+
+    return this.addTask$XWwwFormUrlencoded$Json$Response(params,context).pipe(
       map((r: StrictHttpResponse<Task>) => r.body as Task)
     );
   }
@@ -908,38 +861,32 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/x-www-form-urlencoded` and handles request body of type `application/x-www-form-urlencoded`.
    */
-  addTask$XWwwFormUrlencoded$Xml$Response(
-    params: {
-      /**
-       * Create a new task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Task>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.AddTaskPath,
-      'post'
-    );
+  addTask$XWwwFormUrlencoded$Xml$Response(params: {
+
+    /**
+     * Create a new task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Task>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.AddTaskPath, 'post');
     if (params) {
       rb.body(params.body, 'application/x-www-form-urlencoded');
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'blob',
-          accept: 'application/xml',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Task>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'blob',
+      accept: 'application/xml',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Task>;
+      })
+    );
   }
 
   /**
@@ -952,16 +899,18 @@ export class TaskService extends BaseService {
    *
    * This method sends `application/x-www-form-urlencoded` and handles request body of type `application/x-www-form-urlencoded`.
    */
-  addTask$XWwwFormUrlencoded$Xml(
-    params: {
-      /**
-       * Create a new task in the list
-       */
-      body: Task;
-    },
-    context?: HttpContext
-  ): Observable<Task> {
-    return this.addTask$XWwwFormUrlencoded$Xml$Response(params, context).pipe(
+  addTask$XWwwFormUrlencoded$Xml(params: {
+
+    /**
+     * Create a new task in the list
+     */
+    body: Task
+  },
+  context?: HttpContext
+
+): Observable<Task> {
+
+    return this.addTask$XWwwFormUrlencoded$Xml$Response(params,context).pipe(
       map((r: StrictHttpResponse<Task>) => r.body as Task)
     );
   }
@@ -981,42 +930,40 @@ export class TaskService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getTaskById$Json$Response(
-    params: {
-      api_key?: string;
+  getTaskById$Json$Response(params: {
+    api_key?: string;
 
-      /**
-       * ID of task to return
-       */
-      taskId: number;
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Task>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.GetTaskByIdPath,
-      'get'
-    );
+    /**
+     * Task id to delete
+     */
+    taskId: number;
+
+    /**
+     * ID of task to return
+     */
+    taskId: number;
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Task>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.GetTaskByIdPath, 'get');
     if (params) {
       rb.header('api_key', params.api_key, {});
       rb.path('taskId', params.taskId, {});
       rb.path('taskId', params.taskId, {});
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'json',
-          accept: 'application/json',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Task>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Task>;
+      })
+    );
   }
 
   /**
@@ -1029,18 +976,24 @@ export class TaskService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getTaskById$Json(
-    params: {
-      api_key?: string;
+  getTaskById$Json(params: {
+    api_key?: string;
 
-      /**
-       * ID of task to return
-       */
-      taskId: number;
-    },
-    context?: HttpContext
-  ): Observable<Task> {
-    return this.getTaskById$Json$Response(params, context).pipe(
+    /**
+     * Task id to delete
+     */
+    taskId: number;
+
+    /**
+     * ID of task to return
+     */
+    taskId: number;
+  },
+  context?: HttpContext
+
+): Observable<Task> {
+
+    return this.getTaskById$Json$Response(params,context).pipe(
       map((r: StrictHttpResponse<Task>) => r.body as Task)
     );
   }
@@ -1055,42 +1008,40 @@ export class TaskService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getTaskById$Xml$Response(
-    params: {
-      api_key?: string;
+  getTaskById$Xml$Response(params: {
+    api_key?: string;
 
-      /**
-       * ID of task to return
-       */
-      taskId: number;
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<Task>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.GetTaskByIdPath,
-      'get'
-    );
+    /**
+     * Task id to delete
+     */
+    taskId: number;
+
+    /**
+     * ID of task to return
+     */
+    taskId: number;
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Task>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.GetTaskByIdPath, 'get');
     if (params) {
       rb.header('api_key', params.api_key, {});
       rb.path('taskId', params.taskId, {});
       rb.path('taskId', params.taskId, {});
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'blob',
-          accept: 'application/xml',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Task>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'blob',
+      accept: 'application/xml',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Task>;
+      })
+    );
   }
 
   /**
@@ -1103,18 +1054,24 @@ export class TaskService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getTaskById$Xml(
-    params: {
-      api_key?: string;
+  getTaskById$Xml(params: {
+    api_key?: string;
 
-      /**
-       * ID of task to return
-       */
-      taskId: number;
-    },
-    context?: HttpContext
-  ): Observable<Task> {
-    return this.getTaskById$Xml$Response(params, context).pipe(
+    /**
+     * Task id to delete
+     */
+    taskId: number;
+
+    /**
+     * ID of task to return
+     */
+    taskId: number;
+  },
+  context?: HttpContext
+
+): Observable<Task> {
+
+    return this.getTaskById$Xml$Response(params,context).pipe(
       map((r: StrictHttpResponse<Task>) => r.body as Task)
     );
   }
@@ -1134,43 +1091,34 @@ export class TaskService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteTask$Response(
-    params: {
-      api_key?: string;
+  deleteTask$Response(params: {
+    api_key?: string;
 
-      /**
-       * Task id to delete
-       */
-      taskId: number;
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<void>> {
-    const rb = new RequestBuilder(
-      this.rootUrl,
-      TaskService.DeleteTaskPath,
-      'delete'
-    );
+    /**
+     * Task id to delete
+     */
+    taskId: number;
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<void>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TaskService.DeleteTaskPath, 'delete');
     if (params) {
       rb.header('api_key', params.api_key, {});
       rb.path('taskId', params.taskId, {});
     }
 
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'text',
-          accept: '*/*',
-          context: context,
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return (r as HttpResponse<any>).clone({
-            body: undefined,
-          }) as StrictHttpResponse<void>;
-        })
-      );
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: '*/*',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
   }
 
   /**
@@ -1183,19 +1131,21 @@ export class TaskService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteTask(
-    params: {
-      api_key?: string;
+  deleteTask(params: {
+    api_key?: string;
 
-      /**
-       * Task id to delete
-       */
-      taskId: number;
-    },
-    context?: HttpContext
-  ): Observable<void> {
-    return this.deleteTask$Response(params, context).pipe(
+    /**
+     * Task id to delete
+     */
+    taskId: number;
+  },
+  context?: HttpContext
+
+): Observable<void> {
+
+    return this.deleteTask$Response(params,context).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
+
 }

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface Task {
-  category?: any;
-  description: string;
+  categoryName: string;
+  description?: string;
   dueDate?: string;
   priority?: 'high' | 'medium' | 'low';
 
@@ -10,6 +10,6 @@ export interface Task {
    * Task Status
    */
   status?: 'open' | 'ongoing' | 'completed' | 'overdue';
-  taskId: number;
+  taskId?: number;
   title: string;
 }

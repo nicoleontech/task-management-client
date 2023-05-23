@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { TaskService } from './services/task.service';
+import { CategoryService } from './services/category.service';
 import { UserService } from './services/user.service';
 
 /**
@@ -16,6 +17,7 @@ import { UserService } from './services/user.service';
   declarations: [],
   providers: [
     TaskService,
+    CategoryService,
     UserService,
     ApiConfiguration
   ],

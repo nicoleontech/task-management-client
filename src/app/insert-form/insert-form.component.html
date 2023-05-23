@@ -4,11 +4,21 @@
   <td>
     <input
       type="text"
+      id="category"
+      name="categoryName"
+      value="categoryName"
+      required
+      class="form-control"
+      formControlName="categoryName"
+    />
+  </td>
+  <td>
+    <input
+      type="text"
       id="title"
       name="title"
       value="title"
       required
-      minlength="5"
       class="form-control"
       formControlName="title"
     />
@@ -19,10 +29,6 @@
       id="description"
       name="description"
       value="description"
-      required
-      minlength="5"
-      class="form-control"
-      formControlName="description"
     />
   </td>
 

@@ -50,6 +50,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(receivedTask: Task): void {
+    console.log(receivedTask.categoryName);
     this.taskService
       .addTask$Json$Json({ body: receivedTask })
       .subscribe((response) => {

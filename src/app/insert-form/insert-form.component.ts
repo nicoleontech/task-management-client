@@ -15,8 +15,8 @@ export class InsertFormComponent {
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(5)]],
-      description: ['', [Validators.required, Validators.minLength(5)]],
+      title: ['', [Validators.required]],
+      categoryName: ['', [Validators.required]],
       dueDate: ['', Validators.required],
       priority: ['', Validators.required],
       status: ['', Validators.required],
