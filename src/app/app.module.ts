@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SimpleTableComponent } from './simple-table/simple-table.component';
 import { InsertFormComponent } from './insert-form/insert-form.component';
 import { OrderModule } from 'ngx-order-pipe';
+import { DropdownComponent } from './dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { OrderModule } from 'ngx-order-pipe';
     TaskComponent,
     SimpleTableComponent,
     InsertFormComponent,
+    DropdownComponent,
   ],
   imports: [
     BrowserModule,

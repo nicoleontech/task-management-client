@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { TaskService } from '../api/services';
+import { CategoryService, TaskService } from '../api/services';
 import { Task } from '../api/models';
 
 @Component({
@@ -9,10 +9,14 @@ import { Task } from '../api/models';
   styleUrls: ['./task.component.css'],
 })
 export class TaskComponent implements OnInit, OnDestroy {
-  constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private categoryService: CategoryService
+  ) {}
 
   loading = false;
   taskList: Task[] = [];
+  categories: string[] = [];
   subscription: Subscription | undefined;
   insertedTask: Task = {} as Task;
   updatedTask: Task = {} as Task;
@@ -31,7 +35,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.subscription = this.taskService.getAllTasks$Json().subscribe({
       next: (apiData: Array<Task>) => {
         this.taskList = apiData;
-
+        this.loadCategories();
         console.log(apiData);
       },
       error: (error: any) => {
@@ -47,6 +51,13 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
+  }
+
+  loadCategories() {
+    this.categoryService.getAllCategoriesNames$Json().subscribe((response) => {
+      console.log(response);
+      this.categories = response;
+    });
   }
 
   onSubmit(receivedTask: Task): void {

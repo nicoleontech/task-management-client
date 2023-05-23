@@ -1,7 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
   <th scope="row">#</th>
   <td></td>
-  <td>
+  <!-- <td>
     <input
       type="text"
       id="category"
@@ -11,7 +11,8 @@
       class="form-control"
       formControlName="categoryName"
     />
-  </td>
+  </td> -->
+
   <td>
     <input
       type="text"
@@ -31,7 +32,15 @@
       value="description"
     />
   </td>
-
+  <td>
+    <app-dropdown
+      id="categoryName"
+      name="categoryName"
+      [options]="categories"
+      [label]="label"
+      (onChange)="selectOption()"
+    ></app-dropdown>
+  </td>
   <td>
     <input
       type="date"

@@ -9,15 +9,11 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -36,26 +32,32 @@ export class CategoryService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllCategoriesNames$Json$Response(params?: {
-  },
-  context?: HttpContext
-
-): Observable<StrictHttpResponse<Array<string>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, CategoryService.GetAllCategoriesNamesPath, 'get');
+  getAllCategoriesNames$Json$Response(
+    params?: {},
+    context?: HttpContext
+  ): Observable<StrictHttpResponse<Array<string>>> {
+    const rb = new RequestBuilder(
+      this.rootUrl,
+      CategoryService.GetAllCategoriesNamesPath,
+      'get'
+    );
     if (params) {
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<string>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+          context: context,
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<string>>;
+        })
+      );
   }
 
   /**
@@ -68,13 +70,11 @@ export class CategoryService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllCategoriesNames$Json(params?: {
-  },
-  context?: HttpContext
-
-): Observable<Array<string>> {
-
-    return this.getAllCategoriesNames$Json$Response(params,context).pipe(
+  getAllCategoriesNames$Json(
+    params?: {},
+    context?: HttpContext
+  ): Observable<Array<string>> {
+    return this.getAllCategoriesNames$Json$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<string>>) => r.body as Array<string>)
     );
   }
@@ -89,26 +89,32 @@ export class CategoryService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllCategoriesNames$Xml$Response(params?: {
-  },
-  context?: HttpContext
-
-): Observable<StrictHttpResponse<Array<string>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, CategoryService.GetAllCategoriesNamesPath, 'get');
+  getAllCategoriesNames$Xml$Response(
+    params?: {},
+    context?: HttpContext
+  ): Observable<StrictHttpResponse<Array<string>>> {
+    const rb = new RequestBuilder(
+      this.rootUrl,
+      CategoryService.GetAllCategoriesNamesPath,
+      'get'
+    );
     if (params) {
     }
 
-    return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: 'application/xml',
-      context: context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<string>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'blob',
+          accept: 'application/xml',
+          context: context,
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<string>>;
+        })
+      );
   }
 
   /**
@@ -121,15 +127,12 @@ export class CategoryService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllCategoriesNames$Xml(params?: {
-  },
-  context?: HttpContext
-
-): Observable<Array<string>> {
-
-    return this.getAllCategoriesNames$Xml$Response(params,context).pipe(
+  getAllCategoriesNames$Xml(
+    params?: {},
+    context?: HttpContext
+  ): Observable<Array<string>> {
+    return this.getAllCategoriesNames$Xml$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<string>>) => r.body as Array<string>)
     );
   }
-
 }
