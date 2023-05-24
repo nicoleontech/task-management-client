@@ -15,11 +15,13 @@ export class InsertFormComponent {
   @Input() statusValues: string[] = [];
   @Input() categories: string[] = [];
   @Output() onSubmit = new EventEmitter();
+  @Output() onChange = new EventEmitter();
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      title: ['', [Validators.required]],
-      // categoryName: [Validators.required],
+      title: ['', Validators.required],
+      description: [''],
+      categoryName: [Validators.required],
       dueDate: ['', Validators.required],
       priority: ['', Validators.required],
       status: ['', Validators.required],
@@ -28,8 +30,11 @@ export class InsertFormComponent {
 
   onSubmitForm() {
     const task = this.form.value as Task;
+    console.log(`Task is: ${task}`);
     this.onSubmit.emit(task);
   }
 
-  selectOption() {}
+  selectOption(value: string) {
+    this.onChange.emit(value);
+  }
 }

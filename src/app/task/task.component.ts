@@ -23,6 +23,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   isEditing: boolean = false;
   taskToBeEdited: Task = {} as Task;
+  selectedOptionDropdown: string = '';
 
   priorityValues = ['high', 'medium', 'low'];
   statusValues = ['open', 'ongoing', 'completed', 'overdue'];
@@ -61,7 +62,9 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(receivedTask: Task): void {
-    console.log(receivedTask.categoryName);
+    console.log(receivedTask);
+    receivedTask.categoryName = this.selectedOptionDropdown;
+
     this.taskService
       .addTask$Json$Json({ body: receivedTask })
       .subscribe((response) => {
@@ -69,6 +72,12 @@ export class TaskComponent implements OnInit, OnDestroy {
         this.insertedTask = Object.assign(response);
         this.taskList.push(this.insertedTask);
       });
+  }
+
+  onSelectOption(value: string) {
+    console.log(value);
+    this.selectedOptionDropdown = value;
+    console.log(this.selectedOptionDropdown);
   }
 
   onDeleteTask(taskId: number) {

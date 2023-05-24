@@ -1,6 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
   <th scope="row">#</th>
-  <td></td>
   <!-- <td>
     <input
       type="text"
@@ -18,7 +17,7 @@
       type="text"
       id="title"
       name="title"
-      value="title"
+      placeholder="title"
       required
       class="form-control"
       formControlName="title"
@@ -28,17 +27,20 @@
     <input
       type="text"
       id="description"
+      placeholder="description"
       name="description"
-      value="description"
+      class="form-control"
+      formControlName="description"
     />
   </td>
   <td>
     <app-dropdown
       id="categoryName"
       name="categoryName"
+      [form]="form"
       [options]="categories"
       [label]="label"
-      (onChange)="selectOption()"
+      (onChange)="selectOption($event)"
     ></app-dropdown>
   </td>
   <td>
