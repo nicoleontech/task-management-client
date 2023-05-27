@@ -1,10 +1,12 @@
 import {
+  HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { KeycloakService } from './keycloak.service';
+import { Observable, switchMap, take } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -12,17 +14,24 @@ export class AuthInterceptor implements HttpInterceptor {
     console.log('Initializing interceptor');
   }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
-    // Get the auth token from the service.
-    const authToken = this.keycloakService.getAuthorizationToken();
-
-    // Clone the request and replace the original headers with
-    // cloned headers, updated with the authorization.
-    const authReq = req.clone({
-      headers: req.headers.set('Authorization', authToken!),
-    });
-
-    // send cloned request with header to the next handler.
-    return next.handle(authReq);
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    console.log(this.keycloakService.getToken());
+    return this.keycloakService.getToken().pipe(
+      take(1),
+      switchMap((token: string | null) => {
+        console.log(token);
+        const authRequest = token
+          ? request.clone({
+              setHeaders: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
+          : request;
+        return next.handle(authRequest);
+      })
+    );
   }
 }

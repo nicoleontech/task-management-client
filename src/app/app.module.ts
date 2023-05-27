@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -11,6 +11,7 @@ import { InsertFormComponent } from './insert-form/insert-form.component';
 import { OrderModule } from 'ngx-order-pipe';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { KeycloakService } from './auth/keycloak.service';
 
 @NgModule({
   declarations: [
