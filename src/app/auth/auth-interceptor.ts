@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { KeycloakService } from './keycloak.service';
-import { Observable, switchMap, take } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -18,20 +18,20 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log(this.keycloakService.getToken());
-    return this.keycloakService.getToken().pipe(
-      take(1),
-      switchMap((token: string | null) => {
-        console.log(token);
-        const authRequest = token
-          ? request.clone({
-              setHeaders: {
-                Authorization: `Bearer ${token}`,
-              },
-            })
-          : request;
-        return next.handle(authRequest);
-      })
-    );
+    console.log(this.keycloakService.isAuthenticated());
+
+    if (this.keycloakService.isAuthenticated()) {
+      const authToken = this.keycloakService.getToken();
+
+      const authRequest = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+
+      // Pass the modified request to the next handler
+      return next.handle(authRequest);
+    }
+    return next.handle(request);
   }
 }

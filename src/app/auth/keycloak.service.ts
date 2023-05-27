@@ -12,9 +12,7 @@ export class KeycloakService {
     clientId: 'task-management-spa',
   });
 
-  private tokenSubject$: BehaviorSubject<string | null> = new BehaviorSubject<
-    string | null
-  >(null);
+  private token: string = '';
 
   constructor() {
     console.log('calling init');
@@ -33,7 +31,8 @@ export class KeycloakService {
         .then((authenticated) => {
           console.log(authenticated);
           if (authenticated) {
-            this.tokenSubject$.next(this.keycloak.token!);
+            this.token = this.keycloak.token!;
+            console.log(this.token);
           }
           resolve(authenticated);
         })
@@ -41,10 +40,10 @@ export class KeycloakService {
     });
   }
 
-  getToken(): BehaviorSubject<string | null> {
-    console.log(this.tokenSubject$);
+  getToken(): string {
+    console.log(this.token);
 
-    return this.tokenSubject$;
+    return this.token;
   }
 
   isAuthenticated(): boolean | undefined {

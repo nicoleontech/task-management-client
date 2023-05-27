@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -12,6 +12,12 @@ import { OrderModule } from 'ngx-order-pipe';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { KeycloakService } from './auth/keycloak.service';
+
+export function initializeKeycloak(
+  keycloak: KeycloakService
+): () => Promise<any> {
+  return () => keycloak.initKeycloak();
+}
 
 @NgModule({
   declarations: [
@@ -30,6 +36,12 @@ import { KeycloakService } from './auth/keycloak.service';
   ],
   //RouterModule.forRoot(routes)],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

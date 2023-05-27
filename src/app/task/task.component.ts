@@ -2,7 +2,6 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CategoryService, TaskService } from '../api/services';
 import { Task } from '../api/models';
-import { KeycloakService } from '../auth/keycloak.service';
 
 @Component({
   selector: 'app-task',
@@ -12,8 +11,7 @@ import { KeycloakService } from '../auth/keycloak.service';
 export class TaskComponent implements OnInit, OnDestroy {
   constructor(
     private taskService: TaskService,
-    private categoryService: CategoryService,
-    private keycloakService: KeycloakService
+    private categoryService: CategoryService
   ) {}
 
   loading = false;
@@ -31,42 +29,25 @@ export class TaskComponent implements OnInit, OnDestroy {
   statusValues = ['open', 'ongoing', 'completed', 'overdue'];
   taskId!: number;
 
-  keyCloakToken: string = '';
-
   ngOnInit(): void {
-    this.keycloakService
-      .initKeycloak()
-      .then((authenticated) => {
-        console.log(authenticated);
-        if (authenticated) {
-          const token = this.keycloakService.keycloak.token;
-          console.log(token);
-          this.keycloakService.getToken().next(token!);
+    console.log('starting get api call');
 
-          this.loading = true;
-          this.subscription = this.taskService.getAllTasks$Json().subscribe({
-            next: (apiData: Array<Task>) => {
-              this.taskList = apiData;
-              this.loadCategories();
-              console.log(apiData);
-            },
-            error: (error: any) => {
-              this.loading = false;
-              console.log(error);
-            },
-            complete: () => {
-              this.loading = false;
-              console.log('API call completed');
-            },
-          });
-        } else {
-          // User is not authenticated
-        }
-      })
-      .catch((error) => {
-        // Handle initialization error
+    this.loading = true;
+    this.subscription = this.taskService.getAllTasks$Json().subscribe({
+      next: (apiData: Array<Task>) => {
+        this.taskList = apiData;
+        this.loadCategories();
+        console.log(apiData);
+      },
+      error: (error: any) => {
+        this.loading = false;
         console.log(error);
-      });
+      },
+      complete: () => {
+        this.loading = false;
+        console.log('API call completed');
+      },
+    });
   }
 
   ngOnDestroy(): void {
