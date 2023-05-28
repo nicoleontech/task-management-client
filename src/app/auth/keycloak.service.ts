@@ -16,7 +16,6 @@ export class KeycloakService {
 
   constructor() {
     console.log('calling init');
-    // this.initKeycloak();
   }
 
   initKeycloak(): Promise<any> {
