@@ -18,53 +18,25 @@
       </td>
       <td>
         <span *ngIf="!isEditing">{{ task.title }}</span>
-        <input
-          *ngIf="isEditing && taskToBeEdited.taskId === task.taskId"
-          type="text"
-          id="title"
-          name="title"
-          value="{{ task.title }}"
-          required
-          minlength="5"
-          [(ngModel)]="task.title"
-        />
+        <input *ngIf="isEditing && taskToBeEdited.taskId === task.taskId" type="text" id="title" name="title"
+          value="{{ task.title }}" required minlength="5" [(ngModel)]="task.title" />
       </td>
       <td>
         <span *ngIf="!isEditing">{{ task.description }}</span>
-        <input
-          *ngIf="isEditing && taskToBeEdited.taskId === task.taskId"
-          type="text"
-          id="description"
-          name="description"
-          value="{{ task.description }}"
-          required
-          minlength="5"
-          [(ngModel)]="task.description"
-        />
+        <input *ngIf="isEditing && taskToBeEdited.taskId === task.taskId" type="text" id="description"
+          name="description" value="{{ task.description }}" required minlength="5" [(ngModel)]="task.description" />
       </td>
       <td>
         <span *ngIf="!isEditing">{{ task.dueDate }}</span>
-        <input
-          *ngIf="isEditing && taskToBeEdited.taskId === task.taskId"
-          type="date"
-          id="dueDate"
-          name="dueDate"
-          value="{{ task.dueDate }}"
-          [(ngModel)]="task.dueDate"
-        />
+        <input *ngIf="isEditing && taskToBeEdited.taskId === task.taskId" type="date" id="dueDate" name="dueDate"
+          value="{{ task.dueDate }}" [(ngModel)]="task.dueDate" />
       </td>
       <td>
         <span *ngIf="!isEditing">{{ task.priority }}</span>
         <label for="priority">
-          <select
-            *ngIf="isEditing && taskToBeEdited.taskId === task.taskId"
-            name="priority"
-            [(ngModel)]="task.priority"
-          >
-            <option
-              *ngFor="let priority of priorityValues"
-              [selected]="priority === task.priority"
-            >
+          <select *ngIf="isEditing && taskToBeEdited.taskId === task.taskId" name="priority"
+            [(ngModel)]="task.priority">
+            <option *ngFor="let priority of priorityValues" [selected]="priority === task.priority">
               {{ priority }}
             </option>
           </select>
@@ -73,25 +45,15 @@
       <td>
         <span *ngIf="!isEditing">{{ task.status }}</span>
         <label for="status">
-          <select
-            *ngIf="isEditing && taskToBeEdited.taskId === task.taskId"
-            name="status"
-            [(ngModel)]="task.status"
-          >
-            <option
-              *ngFor="let status of statusValues"
-              [selected]="status === task.status"
-            >
+          <select *ngIf="isEditing && taskToBeEdited.taskId === task.taskId" name="status" [(ngModel)]="task.status">
+            <option *ngFor="let status of statusValues" [selected]="status === task.status">
               {{ status }}
             </option>
           </select>
         </label>
       </td>
       <td>
-        <button
-          (click)="onDeleteTask(task.taskId)"
-          class="btn btn-danger btn-sm"
-        >
+        <button (click)="onDeleteTask(task.taskId)" class="btn btn-danger btn-sm">
           Delete Task
         </button>
       </td>
