@@ -10,11 +10,13 @@ import { FormGroup } from '@angular/forms';
 export class DropdownComponent {
   @Input() label: string | undefined;
   @Input() options: string[] = [];
-  @Input() form: FormGroup = new FormGroup({});
+  @Input() dropdownControl: any;
   @Output() onChange = new EventEmitter();
+  selectedValue: string | undefined;
 
   onChangeValue(event: any) {
     const selectedOption = event.target.value;
     this.onChange.emit(selectedOption);
+    this.dropdownControl.setValue(this.selectedValue);
   }
 }

@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Task } from '../api/models';
 import { CategoryService } from '../api/services';
 
@@ -21,7 +26,7 @@ export class InsertFormComponent {
     this.form = this.fb.group({
       title: ['', Validators.required],
       description: [''],
-      categoryName: [Validators.required],
+      dropdownControl: new FormControl('', [Validators.required]),
       dueDate: ['', Validators.required],
       priority: ['', Validators.required],
       status: ['', Validators.required],

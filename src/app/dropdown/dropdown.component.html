@@ -1,9 +1,9 @@
-<label for="label" [formGroup]="form">
+<label for="label">
   <select
     name="label"
+    [(ngModel)]="selectedValue"
     (change)="onChangeValue($event)"
     class="form-control"
-    formControlName="categoryName"
   >
     <option *ngFor="let option of options" [value]="option">
       {{ option }}

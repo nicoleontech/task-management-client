@@ -37,10 +37,10 @@
     <app-dropdown
       id="categoryName"
       name="categoryName"
-      [form]="form"
       [options]="categories"
       [label]="label"
       (onChange)="selectOption($event)"
+      [dropdownControl]="form.get('dropdownControl')"
     ></app-dropdown>
   </td>
   <td>
