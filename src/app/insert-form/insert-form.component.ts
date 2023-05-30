@@ -32,6 +32,7 @@ export class InsertFormComponent {
     const task = this.form.value as Task;
     console.log(`Task is: ${task}`);
     this.onSubmit.emit(task);
+    this.form.reset();
   }
 
   selectOption(value: string) {
