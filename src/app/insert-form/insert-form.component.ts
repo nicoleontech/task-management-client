@@ -6,7 +6,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { Task } from '../api/models';
-import { CategoryService } from '../api/services';
 
 @Component({
   selector: 'app-insert-form',
@@ -16,25 +15,27 @@ import { CategoryService } from '../api/services';
 export class InsertFormComponent {
   form: FormGroup;
   label: string = 'Category';
+  dropdownControl: FormControl;
   @Input() priorityValues: string[] = [];
   @Input() statusValues: string[] = [];
   @Input() categories: string[] = [];
   @Output() onSubmit = new EventEmitter();
   @Output() onChange = new EventEmitter();
 
-  //placeholder after reset
+  priority = null;
   status = null;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       title: ['', Validators.required],
       description: [''],
-      dropdownControl: new FormControl('', [Validators.required]),
+      dropdownControl: new FormControl('', { nonNullable: true }),
       dueDate: ['', Validators.required],
       priority: ['', Validators.required],
-      //placeholder after reset
-      status: [Validators.required],
+      status: ['', Validators.required],
     });
+    this.dropdownControl = this.form.get('dropdownControl') as FormControl;
+    this.dropdownControl.addValidators(Validators.required);
   }
 
   onSubmitForm() {
