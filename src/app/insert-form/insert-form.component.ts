@@ -22,6 +22,9 @@ export class InsertFormComponent {
   @Output() onSubmit = new EventEmitter();
   @Output() onChange = new EventEmitter();
 
+  //placeholder after reset
+  status = null;
+
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       title: ['', Validators.required],
@@ -29,7 +32,8 @@ export class InsertFormComponent {
       dropdownControl: new FormControl('', [Validators.required]),
       dueDate: ['', Validators.required],
       priority: ['', Validators.required],
-      status: ['', Validators.required],
+      //placeholder after reset
+      status: [Validators.required],
     });
   }
 

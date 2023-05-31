@@ -13,48 +13,22 @@
   </td> -->
 
   <td>
-    <input
-      type="text"
-      id="title"
-      name="title"
-      placeholder="title"
-      required
-      class="form-control"
-      formControlName="title"
-    />
+    <input type="text" id="title" name="title" placeholder="title" required class="form-control"
+      formControlName="title" />
   </td>
   <td>
-    <input
-      type="text"
-      id="description"
-      placeholder="description"
-      name="description"
-      class="form-control"
-      formControlName="description"
-    />
+    <input type="text" id="description" placeholder="description" name="description" class="form-control"
+      formControlName="description" />
   </td>
   <td>
-    <app-dropdown
-      id="categoryName"
-      name="categoryName"
-      [options]="categories"
-      [label]="label"
-      (onChange)="selectOption($event)"
-      [dropdownControl]="form.get('dropdownControl')"
-    ></app-dropdown>
+    <app-dropdown id="categoryName" name="categoryName" [options]="categories" [label]="label"
+      (onChange)="selectOption($event)" [dropdownControl]="form.get('dropdownControl')"></app-dropdown>
   </td>
   <td>
-    <input
-      type="date"
-      id="dueDate"
-      name="dueDate"
-      value=""
-      class="form-control"
-      formControlName="dueDate"
-    />
+    <input type="date" id="dueDate" name="dueDate" value="" class="form-control" formControlName="dueDate" />
   </td>
   <td>
-    <!-- TODO add a placeholder for priority -->
+
     <label for="priority">
       <select name="priority" class="form-control" formControlName="priority">
         <option *ngFor="let priority of priorityValues" [value]="priority">
@@ -67,7 +41,10 @@
     <!-- TODO add a placeholder for status -->
 
     <label for="status">
-      <select name="status" class="form-control" formControlName="status">
+      <select name="status" class="form-control" formControlName="status" [(ngModel)]="status">
+        <!-- <option value="" hidden disabled>Choose status</option> -->
+        <!-- or to stay after the form.reset() -->
+        <option [ngValue]="null" disabled selected hidden> Please select one option </option>
         <option *ngFor="let status of statusValues" [value]="status">
           {{ status }}
         </option>
