@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Task } from '../api/models';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-dropdown',
@@ -10,11 +8,13 @@ import { FormGroup } from '@angular/forms';
 export class DropdownComponent {
   @Input() label: string | undefined;
   @Input() options: string[] = [];
-  @Input() form: FormGroup = new FormGroup({});
+  @Input() dropdownControl: any;
   @Output() onChange = new EventEmitter();
 
   onChangeValue(event: any) {
     const selectedOption = event.target.value;
     this.onChange.emit(selectedOption);
+    console.log(selectedOption);
+    this.dropdownControl.setValue(selectedOption);
   }
 }

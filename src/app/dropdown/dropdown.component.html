@@ -1,11 +1,12 @@
-<label for="label" [formGroup]="form">
+<label for="label">
   <select
     name="label"
     (change)="onChangeValue($event)"
+    [formControl]="dropdownControl"
     class="form-control"
-    formControlName="categoryName"
   >
-    <option *ngFor="let option of options" [selected]="option">
+    <option value="" disabled selected hidden>Category</option>
+    <option *ngFor="let option of options" [value]="option">
       {{ option }}
     </option>
   </select>

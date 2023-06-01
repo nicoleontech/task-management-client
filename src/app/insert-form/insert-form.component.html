@@ -37,10 +37,10 @@
     <app-dropdown
       id="categoryName"
       name="categoryName"
-      [form]="form"
       [options]="categories"
       [label]="label"
       (onChange)="selectOption($event)"
+      [dropdownControl]="dropdownControl"
     ></app-dropdown>
   </td>
   <td>
@@ -54,9 +54,14 @@
     />
   </td>
   <td>
-    <!-- TODO add a placeholder for priority -->
     <label for="priority">
-      <select name="priority" class="form-control" formControlName="priority">
+      <select
+        name="priority"
+        class="form-control"
+        formControlName="priority"
+        [(ngModel)]="priority"
+      >
+        <option [ngValue]="null" disabled selected hidden>Priority</option>
         <option *ngFor="let priority of priorityValues" [value]="priority">
           {{ priority }}
         </option>
@@ -64,17 +69,28 @@
     </label>
   </td>
   <td>
-    <!-- TODO add a placeholder for status -->
-
     <label for="status">
-      <select name="status" class="form-control" formControlName="status">
+      <select
+        name="status"
+        class="form-control"
+        formControlName="status"
+        [(ngModel)]="status"
+      >
+        <option [ngValue]="null" disabled selected hidden>Status</option>
         <option *ngFor="let status of statusValues" [value]="status">
           {{ status }}
         </option>
       </select>
     </label>
   </td>
-
+  <!-- <app-dropdown
+    id="status"
+    name="status"
+    [options]="statusValues"
+    [label]="label"
+    (onChange)="selectOption($event)"
+    [dropdownControl]="dropdownControl"
+  ></app-dropdown> -->
   <button type="submit" class="btn btn-success" [disabled]="!form.valid">
     Insert new Task!
   </button>

@@ -12,6 +12,9 @@ import { OrderModule } from 'ngx-order-pipe';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { KeycloakService } from './auth/keycloak.service';
+import { ErrorInterceptor } from './exceptions/error-interceptor';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function initializeKeycloak(
   keycloak: KeycloakService
@@ -33,6 +36,8 @@ export function initializeKeycloak(
     FormsModule,
     ReactiveFormsModule,
     OrderModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   //RouterModule.forRoot(routes)],
   providers: [
@@ -47,6 +52,7 @@ export function initializeKeycloak(
       useClass: AuthInterceptor,
       multi: true,
     },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
