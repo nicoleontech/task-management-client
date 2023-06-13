@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CategoryService, TaskService } from '../api/services';
 import { Task } from '../api/models';
+import { KeycloakService } from '../auth/keycloak.service';
 
 @Component({
   selector: 'app-task',
@@ -11,7 +12,8 @@ import { Task } from '../api/models';
 export class TaskComponent implements OnInit, OnDestroy {
   constructor(
     private taskService: TaskService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private keycloakService: KeycloakService
   ) {}
 
   loading = false;
@@ -109,5 +111,9 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   onCancelUpdateTask() {
     this.isEditing = false;
+  }
+
+  onLogout() {
+    this.keycloakService.logout();
   }
 }
