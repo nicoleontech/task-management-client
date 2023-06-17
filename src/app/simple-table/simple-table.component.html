@@ -1,12 +1,23 @@
 <div *ngIf="!isEditing">
   <div class="card task-card" *ngFor="let task of taskList | orderBy : order">
     <div class="card-body">
-      <h5 class="card-title">{{ task.title }}</h5>
+      <div class="card-title task-title">
+        <div class="row">
+          <div class="col">
+            {{ task.title }}
+          </div>
+          <div class="col">
+            <span class="task-date">
+              <i class="bi bi-calendar-check"></i>
+              {{ task.dueDate }}</span
+            >
+          </div>
+        </div>
+      </div>
       <p class="card-text">
         {{ task.description }}
       </p>
     </div>
-
     <div class="card-body">
       <div class="row">
         <div class="col-sm-6">
