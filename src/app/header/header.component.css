@@ -1,5 +1,7 @@
 .btn-logout {
   float: right;
+  background-color: #55928a;
+  color: white;
 }
 
 .header-border {

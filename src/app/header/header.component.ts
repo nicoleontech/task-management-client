@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { KeycloakService } from '../auth/keycloak.service';
 
 @Component({
   selector: 'app-header',
@@ -6,7 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
+  constructor(private keycloakService: KeycloakService) {}
   onLogout() {
-    // this.keycloakService.logout();
+    this.keycloakService.logout();
   }
 }
