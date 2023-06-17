@@ -15,6 +15,7 @@ import { KeycloakService } from './auth/keycloak.service';
 import { ErrorInterceptor } from './exceptions/error-interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './header/header.component';
 
 export function initializeKeycloak(
   keycloak: KeycloakService
@@ -29,6 +30,7 @@ export function initializeKeycloak(
     SimpleTableComponent,
     InsertFormComponent,
     DropdownComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
