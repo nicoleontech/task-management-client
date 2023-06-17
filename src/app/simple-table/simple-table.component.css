@@ -9,3 +9,11 @@
 .btn-cancel {
   color: white;
 }
+
+.task-card {
+  margin-bottom: 0.5rem;
+}
+
+.action-btn {
+  float: right;
+}
