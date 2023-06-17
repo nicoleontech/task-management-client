@@ -6,7 +6,6 @@
 </div>
 
 <div class="container">
-  <app-header></app-header>
   <app-simple-table
     [taskList]="taskList"
     [priorityValues]="priorityValues"
@@ -15,13 +14,9 @@
     (updateTask)="onUpdateTask($event)"
   >
   </app-simple-table>
-
-  <app-insert-form
-    [priorityValues]="priorityValues"
-    [statusValues]="statusValues"
-    [categories]="categories"
-    (onSubmit)="onSubmit($event)"
-    (onChange)="onSelectOption($event)"
-  ></app-insert-form>
-  <app-footer></app-footer>
+  <div class="row">
+    <button class="btn add-task" routerLink="/insert-task">
+      <i class="bi bi-plus-circle-fill"> </i>
+    </button>
+  </div>
 </div>

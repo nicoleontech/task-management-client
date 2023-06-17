@@ -56,23 +56,22 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   loadCategories() {
     this.categoryService.getAllCategoriesNames$Json().subscribe((response) => {
-      console.log(response);
       this.categories = response;
     });
   }
 
-  onSubmit(receivedTask: Task): void {
-    console.log(receivedTask);
-    receivedTask.categoryName = this.selectedOptionDropdown;
+  // onSubmit(receivedTask: Task): void {
+  //   console.log(receivedTask);
+  //   receivedTask.categoryName = this.selectedOptionDropdown;
 
-    this.taskService
-      .addTask$Json$Json({ body: receivedTask })
-      .subscribe((response) => {
-        console.log(response);
-        this.insertedTask = Object.assign(response);
-        this.taskList.push(this.insertedTask);
-      });
-  }
+  //   this.taskService
+  //     .addTask$Json$Json({ body: receivedTask })
+  //     .subscribe((response) => {
+  //       console.log(response);
+  //       this.insertedTask = Object.assign(response);
+  //       this.taskList.push(this.insertedTask);
+  //     });
+  // }
 
   onSelectOption(value: string) {
     console.log(value);

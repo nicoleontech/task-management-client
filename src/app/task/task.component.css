@@ -1,0 +1,7 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+
+.add-task > i {
+  color: #55928a;
+  float: right;
+  font-size: 3rem;
+}

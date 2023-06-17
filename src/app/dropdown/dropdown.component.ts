@@ -10,6 +10,7 @@ export class DropdownComponent {
   @Input() options: string[] = [];
   @Input() dropdownControl: any;
   @Output() onChange = new EventEmitter();
+  @Input() id: string = '';
 
   onChangeValue(event: any) {
     const selectedOption = event.target.value;

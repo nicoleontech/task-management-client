@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Task } from '../api/models';
+import { CategoryService, TaskService } from '../api/services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-insert-form',
@@ -15,34 +17,47 @@ import { Task } from '../api/models';
 export class InsertFormComponent {
   form: FormGroup;
   label: string = 'Category';
-  dropdownControl: FormControl;
-  @Input() priorityValues: string[] = [];
-  @Input() statusValues: string[] = [];
-  @Input() categories: string[] = [];
-  @Output() onSubmit = new EventEmitter();
+
+  categoryName: FormControl;
+  categories: string[] = [];
+  priorityValues = ['high', 'medium', 'low'];
+  statusValues = ['open', 'ongoing', 'completed', 'overdue'];
   @Output() onChange = new EventEmitter();
 
   priority = null;
   status = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private categoryService: CategoryService,
+    private taskService: TaskService,
+    private router: Router
+  ) {
     this.form = this.fb.group({
       title: ['', Validators.required],
       description: [''],
-      dropdownControl: new FormControl('', { nonNullable: true }),
+      categoryName: new FormControl('', { nonNullable: true }),
       dueDate: ['', Validators.required],
       priority: ['', Validators.required],
       status: ['', Validators.required],
     });
-    this.dropdownControl = this.form.get('dropdownControl') as FormControl;
-    this.dropdownControl.addValidators(Validators.required);
+    this.categoryName = this.form.get('categoryName') as FormControl;
+    this.categoryName.addValidators(Validators.required);
+    this.loadCategories();
+  }
+
+  loadCategories() {
+    this.categoryService.getAllCategoriesNames$Json().subscribe((response) => {
+      this.categories = response;
+    });
   }
 
   onSubmitForm() {
     const task = this.form.value as Task;
-    console.log(`Task is: ${task}`);
-    this.onSubmit.emit(task);
-    this.form.reset();
+
+    this.taskService.addTask$Json$Json({ body: task }).subscribe((response) => {
+      this.router.navigate(['task-list']);
+    });
   }
 
   selectOption(value: string) {

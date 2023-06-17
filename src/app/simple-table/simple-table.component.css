@@ -3,6 +3,7 @@
 .btn-edit {
   background-color: #55928a;
   color: white;
+  margin-left: 0.25rem;
 }
 
 .btn-cancel {

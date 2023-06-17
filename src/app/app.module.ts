@@ -17,6 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { AppRoutingModule } from './app-routing.module';
 
 export function initializeKeycloak(
   keycloak: KeycloakService
@@ -42,8 +43,9 @@ export function initializeKeycloak(
     OrderModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    AppRoutingModule,
   ],
-  //RouterModule.forRoot(routes)],
+
   providers: [
     {
       provide: APP_INITIALIZER,

@@ -1,61 +1,52 @@
-<form [formGroup]="form" (ngSubmit)="onSubmitForm()">
-  <th scope="row">#</th>
-  <!-- <td>
-    <input
-      type="text"
-      id="category"
-      name="categoryName"
-      value="categoryName"
-      required
-      class="form-control"
-      formControlName="categoryName"
-    />
-  </td> -->
-
-  <td>
-    <input
-      type="text"
-      id="title"
-      name="title"
-      placeholder="title"
-      required
-      class="form-control"
-      formControlName="title"
-    />
-  </td>
-  <td>
-    <input
-      type="text"
-      id="description"
-      placeholder="description"
-      name="description"
-      class="form-control"
-      formControlName="description"
-    />
-  </td>
-  <td>
-    <app-dropdown
-      id="categoryName"
-      name="categoryName"
-      [options]="categories"
-      [label]="label"
-      (onChange)="selectOption($event)"
-      [dropdownControl]="dropdownControl"
-    ></app-dropdown>
-  </td>
-  <td>
-    <input
-      type="date"
-      id="dueDate"
-      name="dueDate"
-      value=""
-      class="form-control"
-      formControlName="dueDate"
-    />
-  </td>
-  <td>
-    <label for="priority">
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        placeholder="title"
+        required
+        class="form-control"
+        formControlName="title"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input
+        type="text"
+        id="description"
+        placeholder="description"
+        name="description"
+        class="form-control"
+        formControlName="description"
+      />
+    </div>
+    <div class="mb-3">
+      <app-dropdown
+        name="categoryName"
+        [options]="categories"
+        [label]="label"
+        (onChange)="selectOption($event)"
+        [dropdownControl]="categoryName"
+      ></app-dropdown>
+    </div>
+    <div class="mb-3">
+      <label for="dueDate" class="form-label">Due Date</label>
+      <input
+        type="date"
+        id="dueDate"
+        name="dueDate"
+        value=""
+        class="form-control"
+        formControlName="dueDate"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="priority" class="form-label">Priority</label>
       <select
+        id="priority"
         name="priority"
         class="form-control"
         formControlName="priority"
@@ -66,11 +57,11 @@
           {{ priority }}
         </option>
       </select>
-    </label>
-  </td>
-  <td>
-    <label for="status">
+    </div>
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
       <select
+        id="status"
         name="status"
         class="form-control"
         formControlName="status"
@@ -81,17 +72,10 @@
           {{ status }}
         </option>
       </select>
-    </label>
-  </td>
-  <!-- <app-dropdown
-    id="status"
-    name="status"
-    [options]="statusValues"
-    [label]="label"
-    (onChange)="selectOption($event)"
-    [dropdownControl]="dropdownControl"
-  ></app-dropdown> -->
-  <button type="submit" class="btn btn-success" [disabled]="!form.valid">
-    Insert new Task!
-  </button>
-</form>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="!form.valid">
+      Insert new Task!
+    </button>
+  </form>
+</div>
