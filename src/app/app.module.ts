@@ -16,6 +16,7 @@ import { ErrorInterceptor } from './exceptions/error-interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 export function initializeKeycloak(
   keycloak: KeycloakService
@@ -31,6 +32,7 @@ export function initializeKeycloak(
     InsertFormComponent,
     DropdownComponent,
     HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
