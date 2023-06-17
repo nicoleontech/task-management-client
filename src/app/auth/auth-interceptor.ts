@@ -18,8 +18,6 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log(this.keycloakService.isAuthenticated());
-
     if (this.keycloakService.isAuthenticated()) {
       const authToken = this.keycloakService.getToken();
 
