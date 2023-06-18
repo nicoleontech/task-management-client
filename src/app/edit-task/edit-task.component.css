@@ -5,3 +5,15 @@
 .edit-btn > button {
   margin-right: 16px;
 }
+
+@media (min-width: 768px) {
+  form {
+    margin-left: 15rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  form {
+    margin-left: 20rem;
+  }
+}
