@@ -32,6 +32,7 @@
         [label]="label"
         (onChange)="selectOption($event)"
         [dropdownControl]="categoryName"
+        [value]="taskToBeEdited.categoryName"
       ></app-dropdown>
     </div>
     <div class="mb-3">
@@ -52,7 +53,7 @@
         name="priority"
         class="form-control"
         formControlName="priority"
-        [(ngModel)]="priority"
+        [(ngModel)]="taskToBeEdited.priority"
       >
         <option [ngValue]="null" disabled selected hidden>Priority</option>
         <option *ngFor="let priority of priorityValues" [value]="priority">
@@ -67,7 +68,7 @@
         name="status"
         class="form-control"
         formControlName="status"
-        [(ngModel)]="status"
+        [(ngModel)]="taskToBeEdited.status"
       >
         <option [ngValue]="null" disabled selected hidden>Status</option>
         <option *ngFor="let status of statusValues" [value]="status">

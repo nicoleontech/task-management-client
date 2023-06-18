@@ -10,9 +10,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private keycloakService: KeycloakService) {
-    console.log('Initializing interceptor');
-  }
+  constructor(private keycloakService: KeycloakService) {}
 
   intercept(
     request: HttpRequest<any>,

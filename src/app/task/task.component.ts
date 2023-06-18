@@ -30,14 +30,11 @@ export class TaskComponent implements OnInit, OnDestroy {
   taskId!: number;
 
   ngOnInit(): void {
-    console.log('starting get api call');
-
     this.loading = true;
     this.subscription = this.taskService.getAllTasks$Json().subscribe({
       next: (apiData: Array<Task>) => {
         this.taskList = apiData;
         this.loadCategories();
-        console.log(apiData);
       },
       error: (error: any) => {
         this.loading = false;
@@ -45,7 +42,6 @@ export class TaskComponent implements OnInit, OnDestroy {
       },
       complete: () => {
         this.loading = false;
-        console.log('API call completed');
       },
     });
   }
@@ -63,16 +59,12 @@ export class TaskComponent implements OnInit, OnDestroy {
   onSelectOption(value: string) {
     console.log(value);
     this.selectedOptionDropdown = value;
-    console.log(this.selectedOptionDropdown);
   }
 
   onDeleteTask(taskId: number) {
-    console.log('delete called!');
-    console.log(taskId);
     this.taskService
       .deleteTask$Response({ api_key: '', taskId: taskId })
       .subscribe((response) => {
-        console.log(response);
         this.taskList.splice(
           this.taskList.findIndex((task) => task.taskId === taskId),
           1
@@ -80,13 +72,10 @@ export class TaskComponent implements OnInit, OnDestroy {
       });
   }
 
-  //TODO : write error component and check if error response
   onUpdateTask(task: Task) {
     this.taskService
       .updateTask$Json$Json({ body: task })
       .subscribe((response) => {
-        console.log(response);
-
         this.taskList[
           this.taskList.findIndex((task) => task.taskId === response.taskId)
         ] = response;

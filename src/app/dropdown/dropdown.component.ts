@@ -11,11 +11,11 @@ export class DropdownComponent {
   @Input() dropdownControl: any;
   @Output() onChange = new EventEmitter();
   @Input() id: string = '';
+  @Input() value: string = '';
 
   onChangeValue(event: any) {
     const selectedOption = event.target.value;
     this.onChange.emit(selectedOption);
-    console.log(selectedOption);
     this.dropdownControl.setValue(selectedOption);
   }
 }

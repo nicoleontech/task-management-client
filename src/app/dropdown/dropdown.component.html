@@ -6,8 +6,8 @@
   (change)="onChangeValue($event)"
   [formControl]="dropdownControl"
   class="form-control"
+  [(ngModel)]="value"
 >
-  <option value="" disabled selected hidden>Category</option>
   <option *ngFor="let option of options" [value]="option">
     {{ option }}
   </option>

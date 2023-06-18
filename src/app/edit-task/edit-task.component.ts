@@ -57,13 +57,10 @@ export class EditTaskComponent {
 
   getTaskId() {
     this.route.params.subscribe((params) => {
-      console.log(params); //log the entire params object
-      let id = params['id']; //log the value of id
-      console.log(id);
+      let id = params['id'];
       this.taskService
         .getTaskById$Json$Response({ taskId: id })
         .subscribe((response) => {
-          console.log(response.body);
           this.taskToBeEdited = response.body;
         });
     });
