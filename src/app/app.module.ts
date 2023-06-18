@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 
 export function initializeKeycloak(
   keycloak: KeycloakService
@@ -34,6 +35,7 @@ export function initializeKeycloak(
     DropdownComponent,
     HeaderComponent,
     FooterComponent,
+    EditTaskComponent,
   ],
   imports: [
     BrowserModule,
