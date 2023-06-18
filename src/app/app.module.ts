@@ -6,8 +6,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { TaskComponent } from './task/task.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SimpleTableComponent } from './simple-table/simple-table.component';
-import { InsertFormComponent } from './insert-form/insert-form.component';
+import { TaskListComponent } from './task-list/task-list.component';
+import { CreateTaskComponent } from './create-task/create-task.component';
 import { OrderModule } from 'ngx-order-pipe';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
@@ -29,8 +29,8 @@ export function initializeKeycloak(
   declarations: [
     AppComponent,
     TaskComponent,
-    SimpleTableComponent,
-    InsertFormComponent,
+    TaskListComponent,
+    CreateTaskComponent,
     DropdownComponent,
     HeaderComponent,
     FooterComponent,

@@ -6,14 +6,14 @@
 </div>
 
 <div class="container">
-  <app-simple-table
+  <app-task-list
     [taskList]="taskList"
     [priorityValues]="priorityValues"
     [statusValues]="statusValues"
     (deleteTask)="onDeleteTask($event)"
     (updateTask)="onUpdateTask($event)"
   >
-  </app-simple-table>
+  </app-task-list>
   <div class="row">
     <button class="btn add-task" routerLink="/insert-task">
       <i class="bi bi-plus-circle-fill"> </i>
