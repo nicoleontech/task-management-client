@@ -22,7 +22,18 @@
       <div class="row">
         <div class="col-sm-6">
           <div>
-            <span>{{ task.categoryName }}</span>
+            <span>
+              <i
+                [ngClass]="{
+                  'bi bi-robot': task.categoryName === 'Coding',
+                  'bi bi-briefcase': task.categoryName === 'Work',
+                  'bi bi-bicycle': task.categoryName === 'Hobbies',
+                  'bi bi-people': task.categoryName === 'Socializing'
+                }"
+              >
+              </i>
+              {{ task.categoryName }}</span
+            >
           </div>
           <div>
             <span>

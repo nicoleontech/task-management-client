@@ -24,13 +24,20 @@
       />
     </div>
     <div class="mb-3">
-      <app-dropdown
+      <label for="categoryName" class="form-label">Category</label>
+      <select
+        id="categoryName"
         name="categoryName"
-        [options]="categories"
-        [label]="label"
-        (onChange)="selectOption($event)"
-        [dropdownControl]="categoryName"
-      ></app-dropdown>
+        class="form-control"
+        formControlName="categoryName"
+        [(ngModel)]="categoryName"
+      >
+        >
+        <option [ngValue]="null" disabled selected hidden>Category</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
     </div>
     <div class="mb-3">
       <label for="dueDate" class="form-label">Due Date</label>

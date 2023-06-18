@@ -1,0 +1,7 @@
+.edit-btn {
+  float: right;
+}
+
+.edit-btn > button {
+  margin-right: 16px;
+}

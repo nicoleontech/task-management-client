@@ -1,9 +1,9 @@
 <div class="container">
-  <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
+  <form [formGroup]="form" (ngSubmit)="onUpdateTask()">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
       <input
-        value="{{ taskToBeEdited.title }}"
+        [(ngModel)]="taskToBeEdited.title"
         type="text"
         id="title"
         name="title"
@@ -18,7 +18,7 @@
       <input
         type="text"
         id="description"
-        value="{{ taskToBeEdited.description }}"
+        [(ngModel)]="taskToBeEdited.description"
         placeholder="description"
         name="description"
         class="form-control"
@@ -26,14 +26,19 @@
       />
     </div>
     <div class="mb-3">
-      <app-dropdown
+      <label for="categoryName" class="form-label">Category</label>
+      <select
+        id="categoryName"
         name="categoryName"
-        [options]="categories"
-        [label]="label"
-        (onChange)="selectOption($event)"
-        [dropdownControl]="categoryName"
-        [value]="taskToBeEdited.categoryName"
-      ></app-dropdown>
+        class="form-control"
+        formControlName="categoryName"
+        [(ngModel)]="taskToBeEdited.categoryName"
+      >
+        <option [ngValue]="null" disabled selected hidden>Category</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
     </div>
     <div class="mb-3">
       <label for="dueDate" class="form-label">Due Date</label>
@@ -41,7 +46,7 @@
         type="date"
         id="dueDate"
         name="dueDate"
-        value="{{ taskToBeEdited.dueDate }}"
+        [(ngModel)]="taskToBeEdited.dueDate"
         class="form-control"
         formControlName="dueDate"
       />
@@ -76,19 +81,10 @@
         </option>
       </select>
     </div>
-
-    <button type="submit" class="btn btn-success" [disabled]="!form.valid">
-      Insert new Task!
-    </button>
-    <div class="col-sm">
-      <button
-        class="btn btn-success btn-sm"
-        (click)="onUpdateTask(taskToBeEdited)"
-      >
+    <div class="col-sm-6 edit-btn">
+      <button type="submit" class="btn btn-success btn-sm">
         <i class="bi bi-save"></i>
       </button>
-    </div>
-    <div class="col-sm">
       <button
         (click)="onCancelEdit()"
         class="btn btn-warning btn-cancel btn-sm"

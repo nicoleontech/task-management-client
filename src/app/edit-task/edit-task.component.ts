@@ -19,7 +19,7 @@ export class EditTaskComponent {
   label: string = 'Category';
   taskToBeEdited: Task = {} as Task;
 
-  categoryName: FormControl;
+  // categoryName: FormControl;
   categories: string[] = [];
   priorityValues = ['high', 'medium', 'low'];
   statusValues = ['open', 'ongoing', 'completed', 'overdue'];
@@ -38,13 +38,12 @@ export class EditTaskComponent {
     this.form = this.fb.group({
       title: ['', Validators.required],
       description: [''],
-      categoryName: new FormControl('', { nonNullable: true }),
+      categoryName: ['', Validators.required],
       dueDate: ['', Validators.required],
       priority: ['', Validators.required],
       status: ['', Validators.required],
     });
-    this.categoryName = this.form.get('categoryName') as FormControl;
-    this.categoryName.addValidators(Validators.required);
+
     this.loadCategories();
     this.getTaskId();
   }
@@ -66,21 +65,13 @@ export class EditTaskComponent {
     });
   }
 
-  onSubmitForm() {
-    const task = this.form.value as Task;
-
-    this.taskService.addTask$Json$Json({ body: task }).subscribe((response) => {
-      this.router.navigate(['tasks']);
-    });
-  }
-
   selectOption(value: string) {
     this.onChange.emit(value);
   }
 
-  onUpdateTask(task: Task) {
+  onUpdateTask() {
     this.taskService
-      .updateTask$Json$Json({ body: task })
+      .updateTask$Json$Json({ body: this.taskToBeEdited })
       .subscribe((response) => {
         console.log(response);
         this.router.navigate(['tasks']);

@@ -18,7 +18,6 @@ export class CreateTaskComponent {
   form: FormGroup;
   label: string = 'Category';
 
-  categoryName: FormControl;
   categories: string[] = [];
   priorityValues = ['high', 'medium', 'low'];
   statusValues = ['open', 'ongoing', 'completed', 'overdue'];
@@ -26,6 +25,7 @@ export class CreateTaskComponent {
 
   priority = null;
   status = null;
+  categoryName = null;
 
   constructor(
     private fb: FormBuilder,
@@ -36,13 +36,11 @@ export class CreateTaskComponent {
     this.form = this.fb.group({
       title: ['', Validators.required],
       description: [''],
-      categoryName: new FormControl('', { nonNullable: true }),
+      categoryName: ['', Validators.required],
       dueDate: ['', Validators.required],
       priority: ['', Validators.required],
       status: ['', Validators.required],
     });
-    this.categoryName = this.form.get('categoryName') as FormControl;
-    this.categoryName.addValidators(Validators.required);
     this.loadCategories();
   }
 
