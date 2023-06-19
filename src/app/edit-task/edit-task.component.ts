@@ -1,10 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService, TaskService } from '../api/services';
 import { Task } from '../api/models';
@@ -15,11 +10,10 @@ import { Task } from '../api/models';
   styleUrls: ['./edit-task.component.css'],
 })
 export class EditTaskComponent {
-  form: FormGroup;
+  // form: FormGroup = {} as FormGroup;
   label: string = 'Category';
   taskToBeEdited: Task = {} as Task;
 
-  // categoryName: FormControl;
   categories: string[] = [];
   priorityValues = ['high', 'medium', 'low'];
   statusValues = ['open', 'ongoing', 'completed', 'overdue'];
@@ -29,21 +23,11 @@ export class EditTaskComponent {
   status = null;
 
   constructor(
-    private fb: FormBuilder,
     private categoryService: CategoryService,
     private taskService: TaskService,
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.form = this.fb.group({
-      title: ['', Validators.required],
-      description: [''],
-      categoryName: ['', Validators.required],
-      dueDate: ['', Validators.required],
-      priority: ['', Validators.required],
-      status: ['', Validators.required],
-    });
-
     this.loadCategories();
     this.getTaskId();
   }
@@ -73,7 +57,7 @@ export class EditTaskComponent {
     this.taskService
       .updateTask$Json$Json({ body: this.taskToBeEdited })
       .subscribe((response) => {
-        console.log(response);
+        // console.log(response);
         this.router.navigate(['tasks']);
       });
   }
