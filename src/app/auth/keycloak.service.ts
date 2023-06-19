@@ -42,28 +42,6 @@ export class KeycloakService {
     return this.keycloak.authenticated;
   }
 
-  onTokenExpired() {
-    console.log(this.keycloak.isTokenExpired());
-    console.log('expired ' + new Date());
-    if (this.keycloak.isTokenExpired()) {
-      this.keycloak
-        .updateToken(5)
-        .then((refreshed) => {
-          if (refreshed) {
-            console.log('refreshed ' + new Date());
-          } else {
-            console.log('not refreshed');
-          }
-        })
-        .catch((err) => {
-          console.error(
-            ` ${err}: failed to refresh token or the session has expired`
-          );
-        });
-    }
-    return false;
-  }
-
   logout() {
     this.keycloak.logout({ redirectUri: window.location.origin });
   }
