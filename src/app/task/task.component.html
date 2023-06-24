@@ -4,28 +4,18 @@
     <span class="sr-only"></span>
   </div>
 </div>
-<div style="top: 0; right: 0; position: absolute">
-  <button class="btn btn-danger btn-md" (click)="onLogout()">Log out</button>
-</div>
 
 <div class="container">
-  <caption style="display: inline">
-    List of tasks
-  </caption>
-  <app-simple-table
+  <app-task-list
     [taskList]="taskList"
     [priorityValues]="priorityValues"
     [statusValues]="statusValues"
     (deleteTask)="onDeleteTask($event)"
-    (updateTask)="onUpdateTask($event)"
   >
-  </app-simple-table>
-
-  <app-insert-form
-    [priorityValues]="priorityValues"
-    [statusValues]="statusValues"
-    [categories]="categories"
-    (onSubmit)="onSubmit($event)"
-    (onChange)="onSelectOption($event)"
-  ></app-insert-form>
+  </app-task-list>
+  <div class="row">
+    <button class="btn add-task" routerLink="/task">
+      <i class="bi bi-plus-circle-fill"> </i>
+    </button>
+  </div>
 </div>

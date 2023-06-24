@@ -2,7 +2,6 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CategoryService, TaskService } from '../api/services';
 import { Task } from '../api/models';
-import { KeycloakService } from '../auth/keycloak.service';
 
 @Component({
   selector: 'app-task',
@@ -12,8 +11,7 @@ import { KeycloakService } from '../auth/keycloak.service';
 export class TaskComponent implements OnInit, OnDestroy {
   constructor(
     private taskService: TaskService,
-    private categoryService: CategoryService,
-    private keycloakService: KeycloakService
+    private categoryService: CategoryService
   ) {}
 
   loading = false;
@@ -32,14 +30,11 @@ export class TaskComponent implements OnInit, OnDestroy {
   taskId!: number;
 
   ngOnInit(): void {
-    console.log('starting get api call');
-
     this.loading = true;
     this.subscription = this.taskService.getAllTasks$Json().subscribe({
       next: (apiData: Array<Task>) => {
         this.taskList = apiData;
         this.loadCategories();
-        console.log(apiData);
       },
       error: (error: any) => {
         this.loading = false;
@@ -47,7 +42,6 @@ export class TaskComponent implements OnInit, OnDestroy {
       },
       complete: () => {
         this.loading = false;
-        console.log('API call completed');
       },
     });
   }
@@ -58,37 +52,19 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   loadCategories() {
     this.categoryService.getAllCategoriesNames$Json().subscribe((response) => {
-      console.log(response);
       this.categories = response;
     });
-  }
-
-  onSubmit(receivedTask: Task): void {
-    console.log(receivedTask);
-    receivedTask.categoryName = this.selectedOptionDropdown;
-
-    this.taskService
-      .addTask$Json$Json({ body: receivedTask })
-      .subscribe((response) => {
-        console.log(response);
-        this.insertedTask = Object.assign(response);
-        this.taskList.push(this.insertedTask);
-      });
   }
 
   onSelectOption(value: string) {
     console.log(value);
     this.selectedOptionDropdown = value;
-    console.log(this.selectedOptionDropdown);
   }
 
   onDeleteTask(taskId: number) {
-    console.log('delete called!');
-    console.log(taskId);
     this.taskService
       .deleteTask$Response({ api_key: '', taskId: taskId })
       .subscribe((response) => {
-        console.log(response);
         this.taskList.splice(
           this.taskList.findIndex((task) => task.taskId === taskId),
           1
@@ -96,13 +72,10 @@ export class TaskComponent implements OnInit, OnDestroy {
       });
   }
 
-  //TODO : write error component and check if error response
   onUpdateTask(task: Task) {
     this.taskService
       .updateTask$Json$Json({ body: task })
       .subscribe((response) => {
-        console.log(response);
-
         this.taskList[
           this.taskList.findIndex((task) => task.taskId === response.taskId)
         ] = response;
@@ -111,9 +84,5 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   onCancelUpdateTask() {
     this.isEditing = false;
-  }
-
-  onLogout() {
-    this.keycloakService.logout();
   }
 }

@@ -1,0 +1,83 @@
+<div *ngIf="!isEditing">
+  <div class="card task-card" *ngFor="let task of taskList | orderBy : order">
+    <div class="card-body">
+      <div class="card-title task-title">
+        <div class="row">
+          <div class="col">
+            {{ task.title }}
+          </div>
+          <div class="col">
+            <span class="task-date">
+              <i class="bi bi-calendar-check"></i>
+              {{ task.dueDate }}</span
+            >
+          </div>
+        </div>
+      </div>
+      <p class="card-text">
+        {{ task.description }}
+      </p>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <div>
+            <span>
+              <i
+                [ngClass]="{
+                  'bi bi-robot': task.categoryName === 'Coding',
+                  'bi bi-briefcase': task.categoryName === 'Work',
+                  'bi bi-bicycle': task.categoryName === 'Hobbies',
+                  'bi bi-people': task.categoryName === 'Socializing'
+                }"
+              >
+              </i>
+              {{ task.categoryName }}</span
+            >
+          </div>
+          <div>
+            <span>
+              <i
+                [ngClass]="{
+                  'bi bi-arrow-down': task.priority === 'low',
+                  'bi bi-justify': task.priority === 'medium',
+                  'bi bi-arrow-up': task.priority === 'high'
+                }"
+              >
+              </i>
+              {{ task.priority }}</span
+            >
+          </div>
+          <div>
+            <span>
+              <i
+                [ngClass]="{
+                  'bi bi-card-list': task.status === 'open',
+                  'bi bi-arrow-clockwise': task.status === 'ongoing',
+                  'bi bi-check-lg': task.status === 'completed',
+                  'bi bi-alarm': task.status === 'overdue'
+                }"
+              >
+              </i
+              >{{ task.status }}</span
+            >
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="action-btn">
+            <button
+              (click)="onDeleteTask(task.taskId)"
+              class="btn btn-danger btn-sm"
+            >
+              <i class="bi bi-trash3"></i>
+            </button>
+
+            <button class="btn btn-edit btn-sm" (click)="onEditTask(task)">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

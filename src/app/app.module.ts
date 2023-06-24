@@ -6,8 +6,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { TaskComponent } from './task/task.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SimpleTableComponent } from './simple-table/simple-table.component';
-import { InsertFormComponent } from './insert-form/insert-form.component';
+import { TaskListComponent } from './task-list/task-list.component';
+import { CreateTaskComponent } from './create-task/create-task.component';
 import { OrderModule } from 'ngx-order-pipe';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
@@ -15,6 +15,10 @@ import { KeycloakService } from './auth/keycloak.service';
 import { ErrorInterceptor } from './exceptions/error-interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { AppRoutingModule } from './app-routing.module';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 
 export function initializeKeycloak(
   keycloak: KeycloakService
@@ -26,9 +30,12 @@ export function initializeKeycloak(
   declarations: [
     AppComponent,
     TaskComponent,
-    SimpleTableComponent,
-    InsertFormComponent,
+    TaskListComponent,
+    CreateTaskComponent,
     DropdownComponent,
+    HeaderComponent,
+    FooterComponent,
+    EditTaskComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,8 +45,9 @@ export function initializeKeycloak(
     OrderModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    AppRoutingModule,
   ],
-  //RouterModule.forRoot(routes)],
+
   providers: [
     {
       provide: APP_INITIALIZER,

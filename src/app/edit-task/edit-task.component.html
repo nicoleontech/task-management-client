@@ -1,0 +1,98 @@
+<div class="container">
+  <form (ngSubmit)="onUpdateTask()" #editForm="ngForm">
+    <div class="col-sm-6 mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input
+        [(ngModel)]="taskToBeEdited.title"
+        type="text"
+        id="title"
+        name="title"
+        placeholder="title"
+        required
+        class="form-control"
+        #title="ngModel"
+      />
+      <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+        Title is required!
+      </div>
+    </div>
+    <div class="col-sm-6 mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input
+        type="text"
+        id="description"
+        [(ngModel)]="taskToBeEdited.description"
+        placeholder="description"
+        name="description"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-6 mb-3">
+      <label for="categoryName" class="form-label">Category</label>
+      <select
+        id="categoryName"
+        name="categoryName"
+        class="form-control"
+        [(ngModel)]="taskToBeEdited.categoryName"
+      >
+        <option [ngValue]="null" disabled selected hidden>Category</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-6 mb-3">
+      <label for="dueDate" class="form-label">Due Date</label>
+      <input
+        type="date"
+        id="dueDate"
+        name="dueDate"
+        [(ngModel)]="taskToBeEdited.dueDate"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-6 mb-3">
+      <label for="priority" class="form-label">Priority</label>
+      <select
+        id="priority"
+        name="priority"
+        class="form-control"
+        [(ngModel)]="taskToBeEdited.priority"
+      >
+        <option [ngValue]="null" disabled selected hidden>Priority</option>
+        <option *ngFor="let priority of priorityValues" [value]="priority">
+          {{ priority }}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-6 mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select
+        id="status"
+        name="status"
+        class="form-control"
+        [(ngModel)]="taskToBeEdited.status"
+      >
+        <option [ngValue]="null" disabled selected hidden>Status</option>
+        <option *ngFor="let status of statusValues" [value]="status">
+          {{ status }}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-6 edit-btn">
+      <button
+        type="submit"
+        class="btn btn-success btn-sm"
+        [disabled]="!editForm.form.valid"
+      >
+        <span>Save<i class="bi bi-save"></i></span>
+      </button>
+      <button
+        (click)="onCancelEdit()"
+        class="btn btn-warning btn-cancel btn-sm"
+      >
+        <span>Cancel<i class="bi bi-x-circle"></i></span>
+      </button>
+    </div>
+  </form>
+</div>

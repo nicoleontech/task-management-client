@@ -1,0 +1,88 @@
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
+    <div class="col-sm-6 mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        placeholder="title"
+        required
+        class="form-control"
+        formControlName="title"
+      />
+    </div>
+    <div class="col-sm-6 mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input
+        type="text"
+        id="description"
+        placeholder="description"
+        name="description"
+        class="form-control"
+        formControlName="description"
+      />
+    </div>
+    <div class="col-sm-6 mb-3">
+      <label for="categoryName" class="form-label">Category</label>
+      <select
+        id="categoryName"
+        name="categoryName"
+        class="form-control"
+        formControlName="categoryName"
+        [(ngModel)]="categoryName"
+      >
+        >
+        <option [ngValue]="null" disabled selected hidden>Category</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-6 mb-3">
+      <label for="dueDate" class="form-label">Due Date</label>
+      <input
+        type="date"
+        id="dueDate"
+        name="dueDate"
+        value=""
+        class="form-control"
+        formControlName="dueDate"
+      />
+    </div>
+    <div class="col-sm-6 mb-3">
+      <label for="priority" class="form-label">Priority</label>
+      <select
+        id="priority"
+        name="priority"
+        class="form-control"
+        formControlName="priority"
+        [(ngModel)]="priority"
+      >
+        <option [ngValue]="null" disabled selected hidden>Priority</option>
+        <option *ngFor="let priority of priorityValues" [value]="priority">
+          {{ priority }}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-6 mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select
+        id="status"
+        name="status"
+        class="form-control"
+        formControlName="status"
+        [(ngModel)]="status"
+      >
+        <option [ngValue]="null" disabled selected hidden>Status</option>
+        <option *ngFor="let status of statusValues" [value]="status">
+          {{ status }}
+        </option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="!form.valid">
+      Insert new Task!
+    </button>
+  </form>
+</div>
