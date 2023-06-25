@@ -45,4 +45,8 @@ export class KeycloakService {
   logout() {
     this.keycloak.logout({ redirectUri: window.location.origin });
   }
+
+  updateToken() {
+    return this.keycloak.updateToken(180);
+  }
 }

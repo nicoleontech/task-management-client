@@ -16,18 +16,28 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (this.keycloakService.isAuthenticated()) {
-      const authToken = this.keycloakService.getToken();
-
-      const authRequest = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
-
-      // Pass the modified request to the next handler
-      return next.handle(authRequest);
+    if (
+      this.keycloakService.isAuthenticated() &&
+      this.keycloakService.keycloak.isTokenExpired(5)
+    ) {
+      this.keycloakService
+        .updateToken()
+        .then(() => this.addAuthHeader(request, next));
     }
-    return next.handle(request);
+    return this.addAuthHeader(request, next);
+  }
+
+  addAuthHeader(request: HttpRequest<any>, next: HttpHandler) {
+    const authToken = this.keycloakService.getToken();
+    if (!authToken) {
+      return next.handle(request);
+    }
+
+    const authRequest = request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+    return next.handle(authRequest);
   }
 }
