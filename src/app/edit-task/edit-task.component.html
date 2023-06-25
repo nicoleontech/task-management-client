@@ -79,20 +79,26 @@
         </option>
       </select>
     </div>
-    <div class="col-sm-6 edit-btn">
-      <button
-        type="submit"
-        class="btn btn-success btn-sm"
-        [disabled]="!editForm.form.valid"
-      >
-        <span>Save<i class="bi bi-save"></i></span>
-      </button>
-      <button
-        (click)="onCancelEdit()"
-        class="btn btn-warning btn-cancel btn-sm"
-      >
-        <span>Cancel<i class="bi bi-x-circle"></i></span>
-      </button>
+    <div class="col-sm-6">
+      <div class="row edit-btn">
+        <div class="col">
+          <button
+            type="submit"
+            class="btn btn-success btn-sm"
+            [disabled]="!editForm.form.valid"
+          >
+            <span>Save<i class="bi bi-save"></i></span>
+          </button>
+        </div>
+        <div class="col">
+          <button
+            (click)="onCancelEdit()"
+            class="btn btn-warning btn-cancel btn-sm"
+          >
+            <span>Cancel<i class="bi bi-x-circle"></i></span>
+          </button>
+        </div>
+      </div>
     </div>
   </form>
 </div>

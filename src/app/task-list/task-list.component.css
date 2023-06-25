@@ -1,19 +1,8 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 
-@media (min-width: 768px) {
-  .task-title {
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-    font-weight: 600;
-  }
-}
-
-@media (max-width: 767px) {
-  .task-title {
-    font-size: 1rem;
-    line-height: 1rem;
-    font-weight: 600;
-  }
+.task-list {
+  overflow-y: scroll;
+  height: 75vh;
 }
 
 .task-date {
@@ -36,4 +25,24 @@
 
 .action-btn {
   float: right;
+}
+
+.status-icons i {
+  margin-right: 3px;
+}
+
+@media (min-width: 768px) {
+  .task-title {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 767px) {
+  .task-title {
+    font-size: 1rem;
+    line-height: 1rem;
+    font-weight: 600;
+  }
 }
