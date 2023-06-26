@@ -47,6 +47,6 @@ export class KeycloakService {
   }
 
   updateToken() {
-    return this.keycloak.updateToken(180);
+    return this.keycloak.updateToken(480);
   }
 }
