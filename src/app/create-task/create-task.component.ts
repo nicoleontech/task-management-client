@@ -1,10 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Task } from '../api/models';
 import { CategoryService, TaskService } from '../api/services';
 import { Router } from '@angular/router';
@@ -35,22 +30,10 @@ export class CreateTaskComponent {
     this.form = new FormGroup({
       title: new FormControl('', Validators.required),
       categoryName: new FormControl(this.categoryName, Validators.required),
-      priority: new FormControl(this.priority, Validators.required),
-      status: new FormControl(this.status, Validators.required),
+      priority: new FormControl(this.priority),
+      status: new FormControl(this.status),
     });
     this.loadCategories();
-  }
-
-  getCategoryName() {
-    return this.form.get('categoryName');
-  }
-
-  getPriority() {
-    return this.form.get('priority');
-  }
-
-  getStatus() {
-    return this.form.get('status');
   }
 
   loadCategories() {
@@ -61,13 +44,12 @@ export class CreateTaskComponent {
 
   onSubmitForm() {
     const task = this.form.value as Task;
-
     this.taskService.addTask$Json$Json({ body: task }).subscribe((response) => {
       this.router.navigate(['tasks']);
     });
   }
 
-  selectOption(value: string) {
-    this.onChange.emit(value);
-  }
+  // selectOption(value: string) {
+  //   this.onChange.emit(value);
+  // }
 }
