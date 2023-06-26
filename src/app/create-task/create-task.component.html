@@ -20,7 +20,6 @@
         placeholder="description"
         name="description"
         class="form-control"
-        formControlName="description"
       />
     </div>
     <div class="col-sm-6 mb-3">
@@ -30,9 +29,7 @@
         name="categoryName"
         class="form-control"
         formControlName="categoryName"
-        [(ngModel)]="categoryName"
       >
-        >
         <option [ngValue]="null" disabled selected hidden>Category</option>
         <option *ngFor="let category of categories" [value]="category">
           {{ category }}
@@ -47,7 +44,6 @@
         name="dueDate"
         value=""
         class="form-control"
-        formControlName="dueDate"
       />
     </div>
     <div class="col-sm-6 mb-3">
@@ -57,7 +53,6 @@
         name="priority"
         class="form-control"
         formControlName="priority"
-        [(ngModel)]="priority"
       >
         <option [ngValue]="null" disabled selected hidden>Priority</option>
         <option *ngFor="let priority of priorityValues" [value]="priority">
@@ -72,7 +67,6 @@
         name="status"
         class="form-control"
         formControlName="status"
-        [(ngModel)]="status"
       >
         <option [ngValue]="null" disabled selected hidden>Status</option>
         <option *ngFor="let status of statusValues" [value]="status">
