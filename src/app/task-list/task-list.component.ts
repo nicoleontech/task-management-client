@@ -17,23 +17,14 @@ export class TaskListComponent {
 
   @Input() taskList: Task[] = [];
   @Output() deleteTask = new EventEmitter<number>();
-  // @Output() editTask = new EventEmitter();
-  // @Output() updateTask = new EventEmitter<Task>();
-  // @Output() cancelUpdateTask = new EventEmitter();
 
   onDeleteTask(taskId: number) {
-    this.deleteTask.emit(taskId);
+    if (confirm('Are you sure you want to delete this task?')) {
+      this.deleteTask.emit(taskId);
+    }
   }
 
   onEditTask(task: Task) {
     this.router.navigate(['/task/', task.taskId]);
   }
-
-  // onUpdateTask(task: Task) {
-  //   this.updateTask.emit(task);
-  //   this.isEditing = false;
-  // }
-  // onCancelEdit() {
-  //   this.isEditing = false;
-  // }
 }

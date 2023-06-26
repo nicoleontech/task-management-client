@@ -28,20 +28,29 @@ export class CreateTaskComponent {
   categoryName = null;
 
   constructor(
-    private fb: FormBuilder,
     private categoryService: CategoryService,
     private taskService: TaskService,
     private router: Router
   ) {
-    this.form = this.fb.group({
-      title: ['', Validators.required],
-      description: [''],
-      categoryName: ['', Validators.required],
-      dueDate: ['', Validators.required],
-      priority: ['', Validators.required],
-      status: ['', Validators.required],
+    this.form = new FormGroup({
+      title: new FormControl('', Validators.required),
+      categoryName: new FormControl(this.categoryName, Validators.required),
+      priority: new FormControl(this.priority, Validators.required),
+      status: new FormControl(this.status, Validators.required),
     });
     this.loadCategories();
+  }
+
+  getCategoryName() {
+    return this.form.get('categoryName');
+  }
+
+  getPriority() {
+    return this.form.get('priority');
+  }
+
+  getStatus() {
+    return this.form.get('status');
   }
 
   loadCategories() {
