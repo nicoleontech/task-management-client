@@ -1,12 +1,12 @@
 <div class="container">
   <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
     <div class="col-sm-6 mb-3">
-      <label for="title" class="form-label">Title</label>
+      <label for="title" class="form-label required">Title</label>
       <input
         type="text"
         id="title"
         name="title"
-        placeholder="title"
+        placeholder="Enter title here"
         required
         class="form-control"
         formControlName="title"
@@ -14,23 +14,25 @@
     </div>
     <div class="col-sm-6 mb-3">
       <label for="description" class="form-label">Description</label>
-      <input
-        type="text"
+      <textarea
+        maxlength="255"
         id="description"
         placeholder="description"
         name="description"
         class="form-control"
-      />
+      ></textarea>
     </div>
     <div class="col-sm-6 mb-3">
-      <label for="categoryName" class="form-label">Category</label>
+      <label for="categoryName" class="form-label required">Category</label>
       <select
         id="categoryName"
         name="categoryName"
         class="form-control"
         formControlName="categoryName"
       >
-        <option [ngValue]="null" disabled selected hidden>Category</option>
+        <option [ngValue]="null" disabled selected hidden>
+          - Select category -
+        </option>
         <option *ngFor="let category of categories" [value]="category">
           {{ category }}
         </option>
@@ -54,7 +56,9 @@
         class="form-control"
         formControlName="priority"
       >
-        <option [ngValue]="null" disabled selected hidden>Priority</option>
+        <option [ngValue]="null" disabled selected hidden>
+          - Select priority -
+        </option>
         <option *ngFor="let priority of priorityValues" [value]="priority">
           {{ priority }}
         </option>
@@ -68,7 +72,9 @@
         class="form-control"
         formControlName="status"
       >
-        <option [ngValue]="null" disabled selected hidden>Status</option>
+        <option [ngValue]="null" disabled selected hidden>
+          - Select status -
+        </option>
         <option *ngFor="let status of statusValues" [value]="status">
           {{ status }}
         </option>
