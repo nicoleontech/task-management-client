@@ -3,14 +3,18 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
 
 ## Development server
+You can run this application either locally or inside a docker container.
+To run the application locally, after cloning this repository you can:
+- run `ng serve` for a dev server.
+- navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+At first, you will see the default login page of keycloak. You can log in using the username nicolesar and password 12345,
+or using the username example and password 12345!
 
-Run `ng serve` for a dev server.
-Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-Alternatively if you wish to run this application inside a docker container, you could follow the steps bellow:
-- open a cli, go to the source directory of the project and execute this bat file: task-management-client-startup.bat.
-- navigate to `http://localhost:4200/`. The application will be accessible via localhost.
-The above mentioned steps will build a docker image for the client application and run it inside a docker container.
+Alternatively, if you wish to run this application inside a docker container, you could follow the steps below:
+- open a cli, go to the source directory of the project, and execute this bat file: `task-management-client-startup.bat`.
+- navigate to `http://localhost:4200/`. The application will be accessible via localhost. At first, you will see the default
+  login page of keycloak. You can log in using the username nicolesar and password 12345, or using the username example and password 12345!
+The above-mentioned steps will build a docker image for the client application and run it inside a docker container.
 
 ## Code scaffolding
 
